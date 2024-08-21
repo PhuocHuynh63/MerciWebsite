@@ -10,9 +10,9 @@
     .background {
 
         img:first-child {
-            scale: 0.8;
+            scale: 0.6;
             position: absolute;
-            top: -300px;
+            top: -200px;
             // overflow: hidden;
             width: 100%;
             animation: cloudMove1;
@@ -24,7 +24,7 @@
 
         img:last-child {
             position: absolute;
-            top: -70px;
+            top: -40px;
             width: 40%;
             animation: cloudMove2;
             animation-duration: 20s;
