@@ -1,0 +1,28 @@
+.homepage {
+
+    .carousel {
+        &.slide {
+
+            .carousel-inner {
+                .carousel-item {
+
+                    &.c1,
+                    &.c3 {
+                        img {
+                            position: relative;
+                            top: -10px;
+                        }
+                    }
+
+                    &.c1,
+                    &.c2,
+                    &.c3,
+                    &.c4 {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -3,7 +3,7 @@
 .header-container {
 
     .logo {
-        img:last-child {
+        img:nth-child(2) {
             margin-top: -100px;
         }
     }
@@ -29,6 +29,11 @@
                     transition: all 0.3s ease;
 
                     &:hover {
+                        background-color: #0945e9a3;
+                        color: #ffffff;
+                    }
+
+                    &.active {
                         background-color: #0945e9a3;
                         color: #ffffff;
                     }
