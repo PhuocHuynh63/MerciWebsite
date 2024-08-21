@@ -5,8 +5,8 @@ const AboutUs = () => {
     return (
         <div className="about-us">
             <div className='background'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724163182/0310_843_1_xgjs7d.svg" alt="" />
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724170340/0310_846_1_1_qudqyx.svg" alt="" />
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724207828/0310_843_1_1_csrrkv.svg" alt="" />
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724207829/0310_846_1_sjirzl.svg" alt="" />
             </div>
             <div className="title">
                 <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724089404/v%E1%BB%81_ch%C3%BAng_t%C3%B4i_hx9ewi.svg" alt="" />
