@@ -1,19 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.scss"
 
 const Header = () => {
     return (
         <div className="header-container">
             <div className="d-flex flex-column mb-3 align-items-center logo">
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724080714/logo_merci_vhf1pe.svg" alt="" />
+                <Link to='/'>
+                    <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724080714/logo_merci_vhf1pe.svg" alt="" />
+                </Link>
                 <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724080757/Merci_Check_Point_2_1_lqax5i.svg" alt="" />
             </div>
             <nav className="navbar-center d-flex justify-content-center align-items-center">
                 <ul className="d-flex">
                     <li><NavLink to="/about-us">VỀ CHÚNG TÔI</NavLink></li>
-                    <li><NavLink to="/about-us">LIÊN HỆ</NavLink></li>
-                    <li><NavLink to="/about-us">SẢN PHẨM</NavLink></li>
-                    <li><NavLink to="/about-us">QUÀ TẶNG</NavLink></li>
+                    <li><NavLink to="/">LIÊN HỆ</NavLink></li>
+                    <li><NavLink to="/">SẢN PHẨM</NavLink></li>
+                    <li><NavLink to="/">QUÀ TẶNG</NavLink></li>
                 </ul>
 
                 <div className="navbar-right">
