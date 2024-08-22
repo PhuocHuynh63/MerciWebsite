@@ -28,6 +28,47 @@ const HomePage = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+      {/* End Carousel */}
+
+
+      {/* Phu Kien */}
+      <div className='accessory'>
+        <div className='title'>PHỤ KIỆN</div>
+
+        <div className='container product d-flex justify-content-center'>
+          <div className='row'>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-3'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+          </div>
+
+          <div className='product-more'>
+            <button>XEM THÊM</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
