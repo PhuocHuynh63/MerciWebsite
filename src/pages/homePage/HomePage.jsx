@@ -135,17 +135,16 @@ const HomePage = () => {
               <p>299.000đ</p>
             </div>
           </div>
+        </div>
+        <div className="background-cloud">
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724343350/M%C3%82Y_GI%E1%BB%AEA_vtbu8q.svg" alt="" />
+        </div>
+        <div className="title">
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724415483/Group_4_oyetfq.svg" alt="" />
+        </div>
 
-          <div className="background-cloud">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724343350/M%C3%82Y_GI%E1%BB%AEA_vtbu8q.svg" alt="" />
-          </div>
-          <div className="title">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724415483/Group_4_oyetfq.svg" alt="" />
-          </div>
-
-          <div className="background-flower-bottom">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724416582/HOA_H%E1%BB%92NG_1_o734sj.svg" alt="" />
-          </div>
+        <div className="background-flower-bottom">
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724416582/HOA_H%E1%BB%92NG_1_o734sj.svg" alt="" />
         </div>
       </div>
     </div>
