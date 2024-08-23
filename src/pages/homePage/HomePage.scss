@@ -125,7 +125,7 @@
         .background {
             position: relative;
             overflow: hidden;
-            top: -400px;
+            top: -500px;
             display: flex;
             height: 800px;
 
@@ -243,7 +243,7 @@
         }
 
         .product {
-            height: auto;
+            height: 700px;
 
             .position {
                 display: flex;
@@ -304,13 +304,10 @@
         .background-cloud {
             position: relative;
             overflow: hidden;
-            top: -1600px;
-            scale: 1.41;
 
             img {
                 z-index: 0;
-                overflow: hidden;
-                width: 80%;
+                // overflow: hidden;
                 // height: 100%;
                 animation-name: animationCloud;
                 animation-duration: 130s;
@@ -332,15 +329,14 @@
 
         .title {
             position: relative;
-            top: -2500px;
-            right: 200px;
+            top: -500px;
+            left: 100px;
+            width: 800px;
         }
 
         .background-flower-bottom {
             position: relative;
-            top: -2500px;
-            right: 200px;
-            scale: 1.1;
+            top: -450px;
         }
     }
 }
