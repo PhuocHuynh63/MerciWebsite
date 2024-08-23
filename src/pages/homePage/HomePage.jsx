@@ -69,6 +69,85 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+
+      {/* New product */}
+      <div className='new-product'>
+        <div className='title'>SẢN PHẨM MỚI</div>
+
+        <div className='container product'>
+          <div className='row d-flex justify-content-between'>
+            <div className='product-item col-4'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-4'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+            <div className='product-item col-4'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+            </div>
+          </div>
+        </div>
+        <div className='product-more'>
+          <button>XEM THÊM</button>
+        </div>
+        <div className='background'>
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724207828/0310_843_1_1_csrrkv.svg" alt="" />
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724343350/M%C3%82Y_GI%E1%BB%AEA_vtbu8q.svg" alt="" />
+        </div>
+      </div>
+
+      <div className='present-set'>
+        <div className='background-flower'>
+          <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724344919/hoaaa_2_1_zipq2d.svg" alt="" />
+        </div>
+        <div className='container product'>
+          <div className='position row-cols-1'>
+            <div className='item'>
+              <div className='product-item col-3 d-flex flex-column'>
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              </div>
+              <p>SET MƯỢT MÀ</p>
+              <p>299.000đ</p>
+            </div>
+
+            <div className='item'>
+              <div className='product-item col-3'>
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              </div>
+              <p>SET MƯỢT MÀ</p>
+              <p>299.000đ</p>
+            </div>
+
+            <div className='item'>
+              <div className='product-item col-3'>
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              </div>
+              <p>SET MƯỢT MÀ</p>
+              <p>299.000đ</p>
+            </div>
+
+            <div className='item'>
+              <div className='product-item col-3'>
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              </div>
+              <p>SET MƯỢT MÀ</p>
+              <p>299.000đ</p>
+            </div>
+          </div>
+
+          <div className="background-cloud">
+            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724343350/M%C3%82Y_GI%E1%BB%AEA_vtbu8q.svg" alt="" />
+          </div>
+          <div className="title">
+            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724415483/Group_4_oyetfq.svg" alt="" />
+          </div>
+
+          <div className="background-flower-bottom">
+            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724416582/HOA_H%E1%BB%92NG_1_o734sj.svg" alt="" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

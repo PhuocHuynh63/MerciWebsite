@@ -39,38 +39,167 @@
             color: #004AAD;
             font-family: 'Montserrat', sans-serif;
         }
-    }
 
-    .product {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .product-item {
-            margin-top: 50px;
-            background-image: url('https://res.cloudinary.com/dwyzqcunj/image/upload/v1724218358/%C3%B4_2_bh7sie.svg');
-            background-repeat: no-repeat;
-            height: 300px;
-
+        .product {
+            height: auto;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            cursor: pointer;
 
-            img {
-                margin-right: 20px;
-                padding-bottom: 24px;
+            .product-item {
+                margin-top: 50px;
+                background-image: url('https://res.cloudinary.com/dwyzqcunj/image/upload/v1724218358/%C3%B4_2_bh7sie.svg');
+                background-repeat: no-repeat;
+                height: 300px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    margin-right: 20px;
+                    padding-bottom: 24px;
+                }
+
+                &:hover {
+                    scale: 1.02;
+                    transition: all 0.3s;
+                }
             }
 
-            &:hover {
-                scale: 1.02;
-                transition: all 0.3s;
+            .product-more {
+                margin-top: 50px;
+
+                button {
+                    color: #004AAD;
+                    font-size: 20px;
+                    font-weight: 700;
+                    border-radius: 32px;
+                    padding: 15px 50px;
+                    font-family: 'Montserrat', sans-serif;
+                    background-color: transparent;
+                    background: linear-gradient(to right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 100%);
+                    border: none;
+                    position: relative;
+                    overflow: hidden;
+                    z-index: 1;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(to right, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.1) 100%);
+                        z-index: -1;
+                        transition: all 0.2s;
+                    }
+
+                    &:hover::before {
+                        opacity: 0.1;
+                    }
+                }
+            }
+        }
+    }
+
+    // New Product
+    .new-product {
+        height: 750px;
+
+        .title {
+            background-color: white;
+            font-size: 31px;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding: 18px;
+            text-align: center;
+            color: #004AAD;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+        }
+
+        .background {
+            position: relative;
+            overflow: hidden;
+            top: -400px;
+            display: flex;
+            height: 800px;
+
+            img {
+                z-index: 0;
+                display: block;
+                overflow: hidden;
+                width: 80%;
+                // height: 100%;
+                animation-name: animationCloud;
+                animation-duration: 150s;
+                animation-delay: -20s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+
+                &:first-child {
+                    position: static;
+                    scale: 0.4;
+                    top: 0;
+                    left: 0;
+                    z-index: 0;
+                    animation-name: animationCloud;
+                    animation-duration: 60s;
+                    animation-delay: -10s;
+                    animation-timing-function: linear;
+                    animation-iteration-count: infinite;
+                }
+
+                &:last-child {
+                    scale: 1.6;
+                }
+            }
+
+            @keyframes animationCloud {
+                0% {
+                    transform: translateX(-145%);
+                }
+
+                100% {
+                    transform: translateX(150%);
+                }
+            }
+        }
+
+        .product {
+            .product-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 50px;
+                background-image: url('https://res.cloudinary.com/dwyzqcunj/image/upload/v1724218358/%C3%B4_2_bh7sie.svg');
+                background-repeat: no-repeat;
+                background-size: 360px 360px;
+                height: 360px;
+                width: 360px;
+                cursor: pointer;
+                z-index: 1;
+
+                img {
+                    margin-right: 20px;
+                    padding-bottom: 24px;
+                }
+
+                &:hover {
+                    scale: 1.02;
+                    transition: all 0.3s;
+                }
             }
         }
 
         .product-more {
             margin-top: 50px;
+            display: flex;
+            justify-content: center;
 
             button {
                 color: #004AAD;
@@ -102,6 +231,116 @@
                     opacity: 0.1;
                 }
             }
+        }
+    }
+
+    .present-set {
+        .background-flower {
+            z-index: 0;
+            position: absolute;
+            left: 400px;
+            scale: 1.1;
+        }
+
+        .product {
+            height: auto;
+
+            .position {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                width: 110%;
+
+                .item {
+                    margin-top: 200px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 69vh;
+
+                    &:first-child {
+                        margin-top: 60px;
+                    }
+
+                    .product-item {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 50px;
+                        background-image: url('https://res.cloudinary.com/dwyzqcunj/image/upload/v1724218358/%C3%B4_2_bh7sie.svg');
+                        background-repeat: no-repeat;
+                        background-size: 360px 360px;
+                        height: 360px;
+                        width: 360px;
+                        cursor: pointer;
+                        z-index: 1;
+
+                        img {
+                            margin-right: 20px;
+                            padding-bottom: 24px;
+                        }
+
+                        &:hover {
+                            scale: 1.02;
+                            transition: all 0.3s;
+                        }
+                    }
+
+                    p {
+                        z-index: 1;
+                        font-size: 31px;
+                        font-weight: 700;
+                        color: #004AAD;
+                        font-family: 'Montserrat', sans-serif;
+
+                        &:nth-child(2) {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+        }
+
+        .background-cloud {
+            position: relative;
+            overflow: hidden;
+            top: -1600px;
+            scale: 1.41;
+
+            img {
+                z-index: 0;
+                overflow: hidden;
+                width: 80%;
+                // height: 100%;
+                animation-name: animationCloud;
+                animation-duration: 130s;
+                animation-delay: -40s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+
+            @keyframes animationCloud {
+                0% {
+                    transform: translateX(-105%);
+                }
+
+                100% {
+                    transform: translateX(128%);
+                }
+            }
+        }
+
+        .title {
+            position: relative;
+            top: -2500px;
+            right: 200px;
+        }
+
+        .background-flower-bottom {
+            position: relative;
+            top: -2500px;
+            right: 200px;
+            scale: 1.1;
         }
     }
 }
