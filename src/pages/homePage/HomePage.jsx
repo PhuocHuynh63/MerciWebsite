@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -7,16 +8,24 @@ const HomePage = () => {
       <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active c1 " data-bs-interval="4000">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211781/TRUE_HARMONY_N%E1%BB%80N_CH%E1%BB%A6_vlvh5z.svg" className="d-block w-100" alt="..." />
+            <Link to='/product/:slug'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211781/TRUE_HARMONY_N%E1%BB%80N_CH%E1%BB%A6_vlvh5z.svg" className="d-block w-100" alt="..." />
+            </Link>
           </div>
           <div className="carousel-item c2" data-bs-interval="4000">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211855/LOVE_STORY_N%E1%BB%80N_CH%E1%BB%A6_voaibu.svg" className="d-block w-100" alt="..." />
+            <Link to='/product/:slug'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211855/LOVE_STORY_N%E1%BB%80N_CH%E1%BB%A6_voaibu.svg" className="d-block w-100" alt="..." />
+            </Link>
           </div>
           <div className="carousel-item c3" data-bs-interval="4000">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211779/PURE_JOY_N%E1%BB%80N_CH%E1%BB%A6_eedu4y.svg" className="d-block w-100" alt="..." />
+            <Link to='/product/:slug'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211779/PURE_JOY_N%E1%BB%80N_CH%E1%BB%A6_eedu4y.svg" className="d-block w-100" alt="..." />
+            </Link>
           </div>
           <div className="carousel-item c4" data-bs-interval="4000">
-            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211860/ETERNAL_BOND_N%E1%BB%80N_CH%E1%BB%A6_fenvoz.svg" className="d-block w-100" alt="..." />
+            <Link to='/product/:slug'>
+              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211860/ETERNAL_BOND_N%E1%BB%80N_CH%E1%BB%A6_fenvoz.svg" className="d-block w-100" alt="..." />
+            </Link>
           </div>
         </div>
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -38,8 +47,11 @@ const HomePage = () => {
         <div className='container product d-flex justify-content-center'>
           <div className='row'>
             <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              <Link to='/product/:slug'>
+                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
+              </Link>
             </div>
+
             <div className='product-item col-3'>
               <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
             </div>
@@ -147,7 +159,7 @@ const HomePage = () => {
           <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724416582/HOA_H%E1%BB%92NG_1_o734sj.svg" alt="" />
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
