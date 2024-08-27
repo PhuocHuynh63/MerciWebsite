@@ -74,6 +74,20 @@ const ProductDetail = (props) => {
                             <button className="purchase">Tiến hành thanh toán</button>
                         </div>
                     </div>
+                    <div className="background">
+                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div className="container product-description">
+                <div className="background">
+                    <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
+                </div>
+                <div className="title">Mô tả sản phẩm</div>
+                <div className="text">
+                    <span><strong>Tinh dầu sả chanh</strong> là sản phẩm thiên nhiên tinh khiết, chiết xuất từ sả chanh tươi ngon. Với hương thơm tươi mát, tinh dầu này mang lại cảm giác thư giãn và nhiều lợi ích cho sức khỏe như khử mùi, làm sạch không khí, giảm căng thẳng, chăm sóc da và xua đuổi côn trùng. Sử dụng tinh dầu bằng cách nhỏ vài giọt vào máy khuếch tán, pha loãng với dầu nền để massage, hoặc nhỏ vào bồn tắm để thư giãn. Tinh dầu sả chanh 5ml là lựa chọn hoàn hảo để mang lại hương thơm tự nhiên và lợi ích sức khỏe cho cuộc sống của bạn.</span>
                 </div>
             </div>
         </div>
