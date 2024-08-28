@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Cart.scss';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -90,9 +91,11 @@ const Cart = () => {
                 </div>
 
                 <div className="action">
-                    <button>
-                        <span>Tiếp tục mua hàng</span>
-                    </button>
+                    <Link to='/'>
+                        <button>
+                            <span>Tiếp tục mua hàng</span>
+                        </button>
+                    </Link>
                     <button>
                         <span>Thanh toán</span>
                     </button>
