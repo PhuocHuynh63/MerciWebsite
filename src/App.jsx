@@ -5,6 +5,9 @@ import Layout from './layouts/Layout'
 import NotFound from './pages/notFound/NotFound'
 import AboutUs from './pages/aboutUs/AboutUs';
 import HomePage from './pages/homePage/HomePage';
+import ProductDetail from './pages/productDetail/ProductDetail';
+import Cart from './pages/shoppingCart/Cart';
+
 
 function App() {
 
@@ -15,6 +18,8 @@ function App() {
           <Route path='*' element={<Layout Component={NotFound} />} />
           <Route path='/' element={<Layout Component={HomePage} />} />
           <Route path='/about-us' element={<Layout Component={AboutUs} />} />
+          <Route path='/product/:slug' element={<Layout Component={ProductDetail} />} />
+          <Route path='/cart' element={<Layout Component={Cart} />} />
 
         </Routes>
       </BrowserRouter>

@@ -23,10 +23,13 @@ const Header = () => {
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Tìm kiếm sản phẩm" />
                     </div>
-                    <div className="cart">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724085139/Shopping_Bag_Full_jiir6o.svg" alt="" />
-                        <span className="dot">1</span>
-                    </div>
+                    <Link to='/cart'>
+                        <div className="cart-icon">
+                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724085139/Shopping_Bag_Full_jiir6o.svg" alt="" />
+                            <span className="dot">1</span>
+                        </div>
+                    </Link>
+
                 </div>
             </nav>
 
