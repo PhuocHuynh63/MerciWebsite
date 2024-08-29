@@ -1,0 +1,102 @@
+.modal-80w {
+    width: 100% !important;
+    max-width: 61.5%;
+}
+
+.modal-header {
+    padding: 0;
+
+    img {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+.modal-body {
+    .checkout {
+        .breadcrumb {
+            a {
+                span {
+                    color: #004AAD;
+                    font-size: 15px;
+                    font-weight: 400;
+                }
+            }
+
+            span {
+                color: #004AAD;
+                font-size: 17px;
+                font-weight: 600;
+            }
+        }
+
+        .checkout-info {
+            h2 {
+                color: #004AAD;
+                font-weight: bold;
+            }
+        }
+
+        .checkout-info__form {
+            .checkout-info__form__input {
+                input {
+                    width: 100%;
+                    max-width: 98%;
+                    padding: 10px 16px;
+                    margin: 10px 0;
+                    border: 1px solid #5E5E5E;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    font-weight: 400;
+                    background-color: #fff;
+                    color: black;
+                }
+            }
+
+            .group-1 {
+                display: flex;
+
+                .checkout-info__form__input {
+                    width: 50%;
+                    margin-right: 10px;
+
+                    &:first-child {
+                        width: 70%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+
+    .cart-button {
+        background-color: transparent;
+        color: #004AAD;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+
+    .purchase-button {
+        padding: 15px 25px;
+        background-color: #004AAD;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #003a8c;
+            transition: all 0.5s;
+        }
+    }
+}
+
+
+.checkout {}

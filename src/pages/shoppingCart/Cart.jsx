@@ -1,8 +1,18 @@
 import { useState } from 'react';
 import './Cart.scss';
 import { Link } from 'react-router-dom';
+import Checkout from '../popUp/checkOut/Checkout';
 
 const Cart = () => {
+
+    /**
+     * Handle modal show/hide (Payment)
+     */
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    //-------------End handle modal show/hide-------------//
+
 
     /**
     * Handle input quantity
@@ -44,6 +54,7 @@ const Cart = () => {
 
     return (
         <div className="cart">
+            <Checkout show={show} handleClose={handleClose} />
             <div className="container">
                 <table>
                     <thead>
@@ -68,7 +79,7 @@ const Cart = () => {
                             <td>Tinh dầu sả chanh 5ml</td>
                             <td>50.000đ</td>
                             <td className='quantity'>
-                                <button cl value="-" onClick={() => toggleQuantity("-")}>-</button>
+                                <button value="-" onClick={() => toggleQuantity("-")}>-</button>
                                 <input
                                     type="text"
                                     onChange={handleQuantityChange}
@@ -96,7 +107,7 @@ const Cart = () => {
                             <span>Tiếp tục mua hàng</span>
                         </button>
                     </Link>
-                    <button>
+                    <button onClick={handleShow}>
                         <span>Thanh toán</span>
                     </button>
                 </div>
