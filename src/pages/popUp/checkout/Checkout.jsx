@@ -8,6 +8,16 @@ const Checkout = (props) => {
     const { show, handleClose } = props;
 
     /**
+     * Toggle payment method
+     */
+    const [paymentMethod, setPaymentMethod] = useState("COD");
+    const handlePaymentMethod = (e) => {
+        setPaymentMethod(e.target.value);
+    }
+
+
+
+    /**
      * Address 
      */
     //----------------Province----------------//
@@ -31,6 +41,7 @@ const Checkout = (props) => {
     const handleSelectProvince = (e) => {
         setSelectProvince(e.target.value);
         setDistricts([]);
+        setWards([]);
     }
 
     //----------------End Province----------------//
@@ -104,6 +115,7 @@ const Checkout = (props) => {
                             <h2>Thông tin giao hàng</h2>
 
                             <div className="checkout-info__form">
+                                {/* Infomation */}
                                 <div className="checkout-info__form__input">
                                     <input type="text" className="name" placeholder="Họ và tên..." />
                                 </div>
@@ -120,15 +132,19 @@ const Checkout = (props) => {
                                 <div className="checkout-info__form__input">
                                     <input type="text" className="note" placeholder="Ghi chú" />
                                 </div>
+                                {/* End Information */}
 
+
+                                {/* Address */}
                                 <div className="group-address">
                                     <div className="title">
+                                        <input type="radio" checked />
                                         <span>Giao tận nơi</span>
                                     </div>
                                     <div className="checkout-info__form__input">
                                         <input type="text" className="address" placeholder="Địa chỉ" />
                                     </div>
-                                    <div className="group-addess__detail">
+                                    <div className="group-address__detail">
                                         <div className="checkout-info__form__input">
                                             <select className="province" onChange={handleSelectProvince}>
                                                 <option value="">Tỉnh/Thành phố</option>
@@ -155,7 +171,7 @@ const Checkout = (props) => {
                                         </div>
                                         <div className="checkout-info__form__input">
                                             <select className="ward" onChange={handleSelectWard}>
-                                                <option value="">Phuờng/xã</option>
+                                                <option value="">Phường/xã</option>
                                                 {
                                                     wards.map((ward) => (
                                                         <option value={ward.ward_id} key={ward.ward_id}>
@@ -167,6 +183,27 @@ const Checkout = (props) => {
                                         </div>
                                     </div>
                                 </div>
+                                {/* End Address */}
+
+
+                                {/* Payment Method */}
+                                <div className="payment-method">
+                                    <br />
+                                    <h2>Phương thức thanh toán</h2>
+                                    <div className="item">
+                                        <div className="cod">
+                                            <input type="radio" checked={paymentMethod === 'COD'} onClick={() => setPaymentMethod('COD')} />
+                                            <span>Thanh toán khi nhận hàng (COD)</span>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/9198/9198191.png" alt="" />
+                                        </div>
+                                        <div className="momo" checked={paymentMethod === 'momo'} onClick={() => setPaymentMethod('momo')}>
+                                            <input type="radio" />
+                                            <span>Thanh toán online qua ví MoMo</span>
+                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725006693/1111111111111111111_1_bzt2tu.svg" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* End Payment method */}
                             </div>
                         </div>
                     </div>
