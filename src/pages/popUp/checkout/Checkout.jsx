@@ -8,13 +8,127 @@ const Checkout = (props) => {
     const { show, handleClose } = props;
 
     /**
+     * Handle Form
+     */
+    const [errors, setErrors] = useState({})
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        note: "",
+        address: "",
+        province: "",
+        district: "",
+        ward: "",
+        paymentMethod: "COD"
+    })
+
+
+    //Handle Submit form
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validate()) {
+            const checkoutData = {
+                formData: formData,
+                status: formData.paymentMethod === 'COD' ? 'Chờ xác nhận' : 'Đang được xử lý',
+                // totalAmount: 0,
+            }
+            console.log(checkoutData);
+        }
+    }
+    //----------------End Handle Submit form----------------//
+    //----------------End Handle Form----------------//
+
+
+    /**
      * Toggle payment method
      */
     const [paymentMethod, setPaymentMethod] = useState("COD");
-    const handlePaymentMethod = (e) => {
-        setPaymentMethod(e.target.value);
-    }
+    //----------------End Toggle payment method----------------//
 
+
+    //Handle change value input
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+
+        if (errors[name]) {
+            setErrors({
+                ...errors,
+                [name]: ""
+            })
+        }
+    }
+    //--------------------End Handle change value input--------------------//
+
+
+    //Validate form
+    const validate = () => {
+        const newErrors = {};
+        const isOnlyLetters = (name) => name.trim().length > 0 && /^[a-zA-ZàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlKmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ\s]+$/.test(name);
+        const isValidEmail = (email) => email.trim().length > 0 && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+        const isValidPhone = (phone) => phone.trim().length > 0 && /^\d{10,11}$/.test(phone);
+        const isValidAddress = (address) => address.trim().length > 0;
+
+        if (!formData.name) {
+            newErrors.name = "Vui lòng nhập họ và tên";
+        } else if (!isOnlyLetters(formData.name)) {
+            newErrors.name = "Họ và tên không hợp lệ";
+        }
+
+        if (!formData.email) {
+            newErrors.email = "Vui lòng nhập email";
+        } else if (!isValidEmail(formData.email)) {
+            newErrors.email = "Email không hợp lệ";
+        }
+
+        if (!formData.phone) {
+            newErrors.phone = "Vui lòng nhập số điện thoại";
+        } else if (!isValidPhone(formData.phone)) {
+            newErrors.phone = "Số điện thoại không hợp lệ";
+        }
+
+        if (!formData.address) {
+            newErrors.address = "Vui lòng nhập địa chỉ";
+        } else if (!isValidAddress(formData.address)) {
+            newErrors.address = "Địa chỉ không hợp lệ";
+        }
+
+        if (!formData.province) {
+            newErrors.province = "Vui lòng chọn tỉnh/thành phố";
+        }
+
+        if (!formData.district) {
+            newErrors.district = "Vui lòng chọn quận/huyện";
+        }
+
+        if (!formData.ward) {
+            newErrors.ward = "Vui lòng chọn phường/xã";
+        }
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length > 0) return false;
+        return true;
+    }
+    //----------------End Validate form----------------//
+
+
+    /**
+     * Handle select payment method
+     * @param {*} method 
+     */
+    const handleSelectPaymentMethod = (method) => {
+        setPaymentMethod(method);
+        setFormData({
+            ...formData,
+            paymentMethod: method
+        })
+    }
+    //----------------End Handle select payment method----------------//
 
 
     /**
@@ -23,9 +137,6 @@ const Checkout = (props) => {
     //----------------Province----------------//
     const [provinces, setProvinces] = useState([]);
     const [selectProvince, setSelectProvince] = useState(null);
-
-    console.log(selectProvince);
-
 
     useEffect(() => {
         addressVietNam.getProvinces()
@@ -42,6 +153,17 @@ const Checkout = (props) => {
         setSelectProvince(e.target.value);
         setDistricts([]);
         setWards([]);
+        setFormData({
+            ...formData,
+            province: e.target.value
+        })
+
+        if (errors.province) {
+            setErrors({
+                ...errors,
+                province: ""
+            })
+        }
     }
 
     //----------------End Province----------------//
@@ -50,9 +172,6 @@ const Checkout = (props) => {
     //----------------District----------------//
     const [districts, setDistricts] = useState([]);
     const [selectDistrict, setSelectDistrict] = useState(null);
-
-    console.log(selectDistrict);
-
 
     useEffect(() => {
         if (selectProvince) {
@@ -69,6 +188,17 @@ const Checkout = (props) => {
     const handleSelectDistrict = (e) => {
         setSelectDistrict(e.target.value);
         setWards([]);
+        setFormData({
+            ...formData,
+            district: e.target.value
+        })
+
+        if (errors.district) {
+            setErrors({
+                ...errors,
+                district: ""
+            })
+        }
     }
     //----------------End District----------------//
 
@@ -92,6 +222,17 @@ const Checkout = (props) => {
 
     const handleSelectWard = (e) => {
         setSelectWard(e.target.value);
+        setFormData({
+            ...formData,
+            ward: e.target.value
+        })
+
+        if (errors.ward) {
+            setErrors({
+                ...errors,
+                ward: ""
+            })
+        }
     }
     //----------------End Address----------------//
 
@@ -114,18 +255,21 @@ const Checkout = (props) => {
                         <div className="checkout-info">
                             <h2>Thông tin giao hàng</h2>
 
-                            <div className="checkout-info__form">
+                            <form className="checkout-info__form" onSubmit={handleSubmit}>
                                 {/* Infomation */}
                                 <div className="checkout-info__form__input">
-                                    <input type="text" className="name" placeholder="Họ và tên..." />
+                                    <input type="text" className={`name ${errors.name ? 'input-error' : ''}`} name="name" placeholder="Họ và tên..." value={formData.name} onChange={handleChange} />
+                                    {errors.name && <p className="error">{errors.name}</p>}
                                 </div>
 
                                 <div className="group-1">
                                     <div className="checkout-info__form__input">
-                                        <input type="text" className="email" placeholder="Email..." />
+                                        <input type="text" className={`email ${errors.email ? 'input-error' : ''}`} name="email" placeholder="Email..." value={formData.email} onChange={handleChange} />
+                                        {errors.email && <p className="error">{errors.email}</p>}
                                     </div>
                                     <div className="checkout-info__form__input">
-                                        <input type="text" className="phone" placeholder="Số điện thoại" />
+                                        <input type="text" className={`phone ${errors.phone ? 'input-error' : ''}`} name="phone" placeholder="Số điện thoại" value={formData.phone} onChange={handleChange} />
+                                        {errors.phone && <p className="error">{errors.phone}</p>}
                                     </div>
                                 </div>
 
@@ -138,15 +282,16 @@ const Checkout = (props) => {
                                 {/* Address */}
                                 <div className="group-address">
                                     <div className="title">
-                                        <input type="radio" checked />
+                                        <input type="radio" checked readOnly />
                                         <span>Giao tận nơi</span>
                                     </div>
                                     <div className="checkout-info__form__input">
-                                        <input type="text" className="address" placeholder="Địa chỉ" />
+                                        <input type="text" className={`address ${errors.address ? 'input-error' : ''}`} name="address" value={formData.address} placeholder="Địa chỉ" onChange={handleChange} />
+                                        {errors.address && <p className="error">{errors.address}</p>}
                                     </div>
                                     <div className="group-address__detail">
                                         <div className="checkout-info__form__input">
-                                            <select className="province" onChange={handleSelectProvince}>
+                                            <select className={`province ${errors.province ? 'input-error' : ''}`} name="province" value={formData.province} onChange={handleSelectProvince}>
                                                 <option value="">Tỉnh/Thành phố</option>
                                                 {
                                                     provinces.map((province) => (
@@ -156,9 +301,10 @@ const Checkout = (props) => {
                                                     ))
                                                 }
                                             </select>
+                                            {errors.province && <span className="error">{errors.province}</span>}
                                         </div>
                                         <div className="checkout-info__form__input">
-                                            <select className="district" onChange={handleSelectDistrict}>
+                                            <select className={`district ${errors.district ? 'input-error' : ''}`} name="district" value={formData.district} onChange={handleSelectDistrict}>
                                                 <option value="">Quận/huyện</option>
                                                 {
                                                     districts.map((district) => (
@@ -168,9 +314,10 @@ const Checkout = (props) => {
                                                     ))
                                                 }
                                             </select>
+                                            {errors.district && <span className="error">{errors.district}</span>}
                                         </div>
                                         <div className="checkout-info__form__input">
-                                            <select className="ward" onChange={handleSelectWard}>
+                                            <select className={`ward ${errors.ward ? 'input-error' : ''}`} name="ward" value={formData.ward} onChange={handleSelectWard}>
                                                 <option value="">Phường/xã</option>
                                                 {
                                                     wards.map((ward) => (
@@ -180,6 +327,7 @@ const Checkout = (props) => {
                                                     ))
                                                 }
                                             </select>
+                                            {errors.ward && <span className="error">{errors.ward}</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -190,32 +338,33 @@ const Checkout = (props) => {
                                 <div className="payment-method">
                                     <br />
                                     <h2>Phương thức thanh toán</h2>
-                                    <div className="item">
-                                        <div className="cod">
-                                            <input type="radio" checked={paymentMethod === 'COD'} onClick={() => setPaymentMethod('COD')} />
+                                    <div className="item" >
+                                        <div className="cod" onClick={() => handleSelectPaymentMethod('COD')} >
+                                            <input type="radio" checked={paymentMethod === 'COD'} readOnly />
                                             <span>Thanh toán khi nhận hàng (COD)</span>
                                             <img src="https://cdn-icons-png.flaticon.com/512/9198/9198191.png" alt="" />
                                         </div>
-                                        <div className="momo" checked={paymentMethod === 'momo'} onClick={() => setPaymentMethod('momo')}>
-                                            <input type="radio" />
+                                        <div className="momo" onClick={() => handleSelectPaymentMethod('momo')} >
+                                            <input type="radio" checked={paymentMethod === 'momo'} readOnly />
                                             <span>Thanh toán online qua ví MoMo</span>
                                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725006693/1111111111111111111_1_bzt2tu.svg" alt="" />
                                         </div>
                                     </div>
                                 </div>
                                 {/* End Payment method */}
-                            </div>
+
+                                <div className="button-action">
+                                    <button className="cart-button" onClick={handleClose}>
+                                        Giỏ hàng
+                                    </button>
+                                    <button type="submit" className="purchase-button">
+                                        Hoàn tất đơn hàng
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <button className="cart-button" onClick={handleClose}>
-                        Giỏ hàng
-                    </button>
-                    <button className="purchase-button" onClick={handleClose}>
-                        Hoàn tất đơn hàng
-                    </button>
-                </Modal.Footer>
             </Modal>
         </ >
     )

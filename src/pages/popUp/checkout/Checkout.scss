@@ -30,10 +30,10 @@
             &:checked::after {
                 content: '';
                 position: absolute;
-                top: 3.3px;
-                left: 3.3px;
-                width: 10.5px;
-                height: 10.5px;
+                top: 3.5px;
+                left: 3.5px;
+                width: 10.6px;
+                height: 10.6px;
                 border-radius: 50%;
                 background-color: #ffffff;
             }
@@ -139,6 +139,7 @@
                             color: #000000;
                             padding: 0px 10px;
                             font-family: 'Montserrat', sans-serif;
+                            cursor: pointer;
 
                             &::-webkit-scrollbar {
                                 width: 10px;
@@ -167,6 +168,17 @@
                 }
             }
 
+            .error {
+                color: red;
+                font-size: 15px;
+                font-weight: 400;
+                margin-top: 5px;
+            }
+
+            .input-error {
+                border: 1px solid red !important;
+            }
+
             .payment-method {
                 .item {
                     margin: 10px 0;
@@ -178,6 +190,7 @@
                         border: 1px solid #5E5E5E;
                         padding: 10px 20px;
                         border-radius: 4px 4px 0 0;
+                        cursor: pointer;
 
                         span {
                             margin-left: 10px;
@@ -197,6 +210,7 @@
                         border-top: none;
                         padding: 10px 20px;
                         border-radius: 0 0 4px 4px;
+                        cursor: pointer;
 
                         span {
                             margin-left: 10px;
@@ -210,35 +224,37 @@
                     }
                 }
             }
-        }
-    }
-}
 
-.modal-footer {
-    display: flex;
-    justify-content: space-around;
+            .button-action {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 30px;
+                padding: 10px;
 
-    .cart-button {
-        background-color: transparent;
-        color: #004AAD;
-        font-size: 18px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-    }
+                .cart-button {
+                    background-color: transparent;
+                    color: #004AAD;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border: none;
+                    cursor: pointer;
+                }
 
-    .purchase-button {
-        padding: 15px 25px;
-        background-color: #004AAD;
-        color: white;
-        font-weight: 600;
-        font-size: 18px;
-        border: none;
-        cursor: pointer;
+                .purchase-button {
+                    padding: 15px 25px;
+                    background-color: #004AAD;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 18px;
+                    border: none;
+                    cursor: pointer;
 
-        &:hover {
-            background-color: #003a8c;
-            transition: all 0.5s;
+                    &:hover {
+                        background-color: #003a8c;
+                        transition: all 0.5s;
+                    }
+                }
+            }
         }
     }
 }
