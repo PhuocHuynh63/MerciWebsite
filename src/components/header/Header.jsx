@@ -20,7 +20,7 @@ const Header = () => {
 
                 <div className="navbar-right">
                     <div className="search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Tìm kiếm sản phẩm" />
                     </div>
                     <Link to='/cart'>
