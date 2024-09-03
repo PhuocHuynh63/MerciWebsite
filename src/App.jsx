@@ -7,6 +7,7 @@ import AboutUs from './pages/aboutUs/AboutUs';
 import HomePage from './pages/homePage/HomePage';
 import ProductDetail from './pages/productDetail/ProductDetail';
 import Cart from './pages/shoppingCart/Cart';
+import ListProduct from './pages/listProduct/ListProduct';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/about-us' element={<Layout Component={AboutUs} />} />
           <Route path='/product/:slug' element={<Layout Component={ProductDetail} />} />
           <Route path='/cart' element={<Layout Component={Cart} />} />
+          <Route path='/list-product/:slug' element={<Layout Component={ListProduct} />} />
 
         </Routes>
       </BrowserRouter>

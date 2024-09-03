@@ -1,0 +1,147 @@
+.list-product {
+    display: flex;
+    background: linear-gradient(#5083EB 0%, #B4C0FF 100%);
+
+    .dropdown {
+
+        .custom-active {
+            color: #004AAD;
+            font-weight: 600;
+            font-size: 20px;
+            font-family: 'montserrat', sans-serif;
+            background-color: #fdfdfd;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: all 0.3s;
+
+            &:hover {
+                background-color: #f6f6f6;
+            }
+        }
+
+        .custom-dropdown {
+            background-color: transparent;
+            border: none;
+
+            li {
+                margin-right: 10px;
+
+                a {
+                    color: #004AAD;
+                    font-weight: 600;
+                    font-size: 20px;
+                    font-family: 'montserrat', sans-serif;
+                    padding: 10px;
+                    text-align: center;
+                    display: block;
+                    transition: all 0.3s;
+                    background-color: #ffff;
+                    margin-top: 5px;
+                    margin-bottom: 15px;
+                    border-radius: 10px;
+                    width: 100%;
+
+                    &:hover {
+                        background-color: #f6f6f6;
+                    }
+                }
+            }
+
+            .hide {
+                display: none;
+            }
+        }
+
+
+    }
+
+    .content {
+        .product {
+            margin-bottom: 80px;
+            transition: all 0.3s;
+
+            &:hover {
+                transform: scale(1.013);
+            }
+
+            .background {
+                position: relative;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                img {
+                    width: 85%;
+                    border-radius: 10px;
+                    transition: all 0.3s;
+                }
+
+                .product-info {
+                    position: absolute;
+                    margin-top: 10px;
+                    top: 23px;
+                    transform: translateX(-120%);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    padding: 10px;
+                    color: #ffffff;
+                    transition: all 0.3s;
+
+                    img {
+                        width: 230px;
+                        height: 100%;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        text-align: center;
+                        color: #004AAD;
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 600;
+                        font-size: 19px;
+
+                        &:nth-child(2) {
+                            margin: 10px 0 3px 0;
+                        }
+                    }
+                }
+
+                .action {
+                    position: absolute;
+                    bottom: 37px;
+                    left: 62px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: all 0.3s;
+
+                    button {
+                        color: #004AAD;
+                        background-color: #fdfdfd;
+                        font-weight: 600;
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 15px;
+                        border: none;
+                        border-radius: 16px;
+                        transition: all 0.3s;
+                        padding: 15px 14px;
+                        width: auto;
+                        white-space: nowrap;
+
+                        &:first-child {
+                            margin-right: 15px;
+                        }
+
+                        &:hover {
+                            background-color: #f6f6f6;
+                            color: #004AAD;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
