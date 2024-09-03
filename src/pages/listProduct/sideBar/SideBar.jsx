@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import './SideBar.scss';
+import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
 
@@ -33,8 +34,12 @@ const SideBar = () => {
             </div>
 
             <div className="category">
-                <p>Sản phẩm</p>
-                <p>Quà tặng</p>
+                <NavLink to='/list-product/:slug'>
+                    Sản phẩm
+                </NavLink>
+                <NavLink to='/list-product/combo'>
+                    Quà tặng
+                </NavLink>
             </div>
 
             <div className="price">
