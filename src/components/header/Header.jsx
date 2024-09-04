@@ -1,9 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.scss"
+import { useState } from "react";
+import ModalLogin from "../../pages/loginPage/ModalLogin/ModalLogin";
 
 const Header = () => {
+
+    /**
+     * Handle show login
+     */
+    const [showLogin, setShowLogin] = useState(false);
+    const handleShowLogin = () => {
+        setShowLogin(!showLogin);
+    }
+    //---------------------End Login---------------------//
+
     return (
         <div className="header-container">
+            <ModalLogin show={showLogin} handleClose={handleShowLogin} />
             <div className="d-flex flex-column mb-3 align-items-center logo">
                 <Link to='/'>
                     <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724080714/logo_merci_vhf1pe.svg" alt="" />
@@ -29,10 +42,11 @@ const Header = () => {
                         </div>
                     </Link>
 
+                    <div className="user-icon" onClick={handleShowLogin}>
+                        <i className="fa-solid fa-user"></i>
+                    </div>
                 </div>
             </nav>
-
-
         </div>
     );
 }

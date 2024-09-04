@@ -68,6 +68,7 @@
                 border: none;
                 border-radius: 33px;
                 padding-right: 10px;
+                color: #000000;
             }
 
             input:focus {
@@ -98,6 +99,17 @@
                 height: 17px;
                 top: -11px;
                 left: -14px;
+            }
+        }
+
+        .user-icon {
+            display: flex;
+            align-items: center;
+
+            i {
+                font-size: 2rem;
+                color: #666666;
+                cursor: pointer;
             }
         }
     }
