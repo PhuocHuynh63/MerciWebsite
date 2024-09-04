@@ -1,4 +1,4 @@
-import { https } from "./config"
+import https from "./config"
 
 export const merci = {
 
