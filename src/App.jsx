@@ -10,6 +10,7 @@ import Cart from './pages/shoppingCart/Cart';
 import ListProduct from './pages/listProduct/ListProduct';
 import LayoutProfileUser from './layouts/LayoutProfileUser';
 import ProfileUser from './pages/profileUser/ProfileUser';
+import ChangePassword from './pages/changePassword/ChangePassword';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
           {/* Profile */}
           <Route path='/profile' element={<LayoutProfileUser Component={ProfileUser} />} />
+          <Route path='/changepassword' element={<LayoutProfileUser Component={ChangePassword} />} />
           {/* End Profile */}
         </Routes>
       </BrowserRouter>

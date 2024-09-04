@@ -15,8 +15,8 @@ const SideBarProfileUser = () => {
 
             <div className="profile-tag">
                 <NavLink to='/profile'>Thông tin tài khoản</NavLink>
-                <NavLink to='/profile/changepassword'>Đổi mật khẩu</NavLink>
-                <NavLink to='/profile/order'>Đơn mua</NavLink>
+                <NavLink to='/changepassword'>Đổi mật khẩu</NavLink>
+                <NavLink to='/order'>Đơn mua</NavLink>
             </div>
         </div>
     );
