@@ -8,6 +8,8 @@ import HomePage from './pages/homePage/HomePage';
 import ProductDetail from './pages/productDetail/ProductDetail';
 import Cart from './pages/shoppingCart/Cart';
 import ListProduct from './pages/listProduct/ListProduct';
+import LayoutProfileUser from './layouts/LayoutProfileUser';
+import ProfileUser from './pages/profileUser/ProfileUser';
 
 
 function App() {
@@ -23,6 +25,9 @@ function App() {
           <Route path='/cart' element={<Layout Component={Cart} />} />
           <Route path='/list-product/:slug' element={<Layout Component={ListProduct} />} />
 
+          {/* Profile */}
+          <Route path='/profile' element={<LayoutProfileUser Component={ProfileUser} />} />
+          {/* End Profile */}
         </Routes>
       </BrowserRouter>
     </div>
