@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ProductDetail.scss';
 
 const ProductDetail = (props) => {
@@ -41,6 +41,15 @@ const ProductDetail = (props) => {
         }
     }
     //-------------End handle input quantity-------------//
+
+
+    /**
+     * Scroll to top when component is mounted
+     */
+    useEffect(() => {
+        window.scrollTo(0, 300);
+    }, []);
+    //----------------End scroll to top------------------//
 
     return (
         <div className="product-detail">
