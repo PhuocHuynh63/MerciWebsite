@@ -14,7 +14,7 @@ const PurchaseOrderHeader = ({ onStatusChange }) => {
     //----------------------End handle status----------------------//
 
     return (
-        <div className="tracking-header">
+        <div className="purchase-order-header">
             {['Tất cả', 'Chờ xác nhận', 'Đang được xử lý', 'Đang giao', 'Đã giao', 'Đã hủy'].map((status) => (
                 <span key={status} className={activeStatus === status ? 'active' : ''} onClick={() => handleStatusClick(status)}>
                     {status}
