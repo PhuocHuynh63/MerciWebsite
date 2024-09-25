@@ -1,8 +1,22 @@
 import { useState } from 'react';
 import './ProductDetail.scss';
+import DashboardStar from '../../components/dashboardStar/DashboardStar';
+import CommentModal from './commentModal/CommentModal';
+import ListComment from '../../components/listComment/ListComment';
 
 const ProductDetail = (props) => {
     const { slug } = props;
+
+
+    /**
+     * Modal Feedback
+     */
+    const [showModal, setShowModal] = useState(false);
+    const handleOpenModal = () => {
+        setShowModal(true);
+    }
+    //----------------End modal feedback------------------//
+
 
     /**
      * Form Submit Feedback Handler
@@ -96,8 +110,6 @@ const ProductDetail = (props) => {
             return 'fa-regular fa-star';
         }
     }
-
-
     //----------------End handle star rating------------------//
 
     return (
@@ -197,178 +209,21 @@ const ProductDetail = (props) => {
                 <div className="title">Đánh giá</div>
 
                 <div className="feedback">
-                    <div className="star-dashboard">
-                        <div className="average">
-                            <span className='total-star'>4.5/5</span>
-                            <div className="star">
-                                {[1, 2, 3, 4, 5].map((star, index) => (
-                                    <i
-                                        key={index}
-                                        id={`star-${index + 1}`}
-                                        className={handleViewStarRating(index, 4.5)}
-                                    ></i>
-                                ))}
-                            </div>
-                            <span className='total-feedback'>1.000 đánh giá</span>
-                        </div>
-
-                        <div className="star-detail">
-                            {[5, 4, 3, 2, 1].map((star, index) => (
-                                <ul>
-                                    <li>
-                                        <div className="number-star">
-                                            <span>{star}</span>
-                                            <i
-                                                key={index}
-                                                id={`star-${index + 1}`}
-                                                className='fa-solid fa-star star-detail'
-                                            >
-                                            </i>
-                                        </div>
-
-                                        <div className="progress-bar">
-                                            <div id={`progress-${star}`} className="progress"></div>
-                                        </div>
-
-                                        <div className="percent">
-                                            <span>3%</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            ))}
-                        </div>
-
-                    </div>
+                    <DashboardStar handleViewStarRating={handleViewStarRating} />
 
                     <div className="comment">
-                        <div className="title">
-                            <span>Đánh giá của khách hàng</span>
-
-                            <div className="filter">
-                                {[5, 4, 3, 2, 1].map(star => (
-                                    <button key={star} className='filter-star'>
-                                        {star} <i className='fa-solid fa-star'></i>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
                         <div className="list-comment">
-                            <div className="comment">
-                                <div className="info">
-                                    <div className="left">
-                                        <img src="https://i.pinimg.com/236x/55/1e/61/551e619c14e5a8149aadb8c3685cbf0b.jpg" alt="" />
-                                    </div>
+                            <ListComment handleViewStarRating={handleViewStarRating} />
 
-                                    <div className="right">
-                                        <div className="group-name">
-                                            <div className="name">
-                                                <span>Nguyễn Văn A</span>
-                                            </div>
-
-                                            <div className="time">
-                                                <span class="material-symbols-outlined custom">
-                                                    avg_pace
-                                                </span>
-
-                                                <span>25/09/2024 3:00</span>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="star">
-                                            {[1, 2, 3, 4, 5].map((star, index) => (
-                                                <i
-                                                    key={index}
-                                                    className={handleViewStarRating(index, 4)}
-                                                ></i>
-                                            ))}
-                                        </div>
-
-                                        <div className="content">
-                                            <span>Tinh dầu sả chanh rất tốt, mùi thơm dễ chịu, giá cả hợp lý. Sẽ mua thêm ở đây nếu cần. Chất lượng tốt, bồ mình rất thích</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="info">
-                                    <div className="left">
-                                        <img src="https://i.pinimg.com/236x/55/1e/61/551e619c14e5a8149aadb8c3685cbf0b.jpg" alt="" />
-                                    </div>
-
-                                    <div className="right">
-                                        <div className="group-name">
-                                            <div className="name">
-                                                <span>Nguyễn Văn A</span>
-                                            </div>
-
-                                            <div className="time">
-                                                <span class="material-symbols-outlined custom">
-                                                    avg_pace
-                                                </span>
-
-                                                <span>25/09/2024 3:00</span>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="star">
-                                            {[1, 2, 3, 4, 5].map((star, index) => (
-                                                <i
-                                                    key={index}
-                                                    className={handleViewStarRating(index, 4)}
-                                                ></i>
-                                            ))}
-                                        </div>
-
-                                        <div className="content">
-                                            <span>Tinh dầu sả chanh rất tốt, mùi thơm dễ chịu, giá cả hợp lý. Sẽ mua thêm ở đây nếu cần. Chất lượng tốt, bồ mình rất thích</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="info">
-                                    <div className="left">
-                                        <img src="https://i.pinimg.com/236x/55/1e/61/551e619c14e5a8149aadb8c3685cbf0b.jpg" alt="" />
-                                    </div>
-
-                                    <div className="right">
-                                        <div className="group-name">
-                                            <div className="name">
-                                                <span>Nguyễn Văn A</span>
-                                            </div>
-
-                                            <div className="time">
-                                                <span class="material-symbols-outlined custom">
-                                                    avg_pace
-                                                </span>
-
-                                                <span>25/09/2024 3:00</span>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="star">
-                                            {[1, 2, 3, 4, 5].map((star, index) => (
-                                                <i
-                                                    key={index}
-                                                    className={handleViewStarRating(index, 4)}
-                                                ></i>
-                                            ))}
-                                        </div>
-
-                                        <div className="content">
-                                            <span>Tinh dầu sả chanh rất tốt, mùi thơm dễ chịu, giá cả hợp lý. Sẽ mua thêm ở đây nếu cần. Chất lượng tốt, bồ mình rất thích</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className="button-more">
+                                <button className='more' onClick={handleOpenModal}>Xem thêm</button>
                             </div>
-
-                            <button>Xem thêm</button>
                         </div>
                     </div>
                 </div >
             </div >
+
+            <CommentModal isModalOpen={showModal} handleCancel={() => setShowModal(false)} handleViewStarRating={handleViewStarRating} />
         </div >
     );
 }
