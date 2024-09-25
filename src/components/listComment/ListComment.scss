@@ -1,0 +1,87 @@
+.comment {
+    .title {
+        .filter {
+            button {
+                background-color: transparent;
+                outline: 1px solid #808080;
+                color: #7D7D7D;
+                font-weight: 700;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 19px;
+                padding: 10px 20px;
+                margin-right: 10px;
+                border: none;
+                border-radius: 50px;
+                transition: all 0.4s;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #004AAD;
+                    color: white;
+                }
+
+                i {
+                    color: #DEB926;
+                }
+            }
+        }
+    }
+
+    .info {
+        display: flex;
+        align-items: start;
+        gap: 0;
+        margin-top: 25px;
+
+        .left {
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 2px;
+            }
+        }
+
+        .right {
+            margin-left: 15px;
+
+            .group-name {
+                display: flex;
+                align-items: center;
+
+                .name {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #004AAD;
+                }
+
+                .time {
+                    color: #7D7D7D;
+
+                    .custom {
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin: 0 5px 0 10px;
+                    }
+                }
+            }
+
+            .star {
+                display: flex;
+                margin-top: 3px;
+
+                i {
+                    color: #DEB926;
+                    font-size: 17px;
+                }
+            }
+
+            .content {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 20px;
+                color: #2e2e2e;
+                margin-top: 10px;
+            }
+        }
+    }
+}
