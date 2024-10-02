@@ -2,18 +2,20 @@ import { useState, useRef, useEffect } from "react";
 import './SideBar.scss';
 import { NavLink } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = ({ onPriceFilter, minPrice }) => {
 
     /**
      * Price slider
      */
-    const [priceSlider, setPriceSlider] = useState(10000);
+    const [priceSlider, setPriceSlider] = useState(minPrice);
     const sliderRef = useRef(null);
     const valueRef = useRef(null);
 
     const handlePriceSlider = (e) => {
-        setPriceSlider(parseInt(e.target.value));
-    }
+        const newPrice = parseInt(e.target.value);
+        setPriceSlider(newPrice);
+        onPriceFilter(newPrice); // Gọi hàm lọc theo giá khi người dùng thay đổi giá trị
+    };
 
     useEffect(() => {
         const slider = sliderRef.current;
@@ -24,7 +26,6 @@ const SideBar = () => {
             value.style.left = `calc(${percent}% - ${percent * 0.3}px)`;
         }
     }, [priceSlider]);
-    //-------------------End Price slider-------------------//
 
     return (
         <div className="list-product_sidebar">
@@ -34,10 +35,10 @@ const SideBar = () => {
             </div>
 
             <div className="category">
-                <NavLink to='/list-product/:slug'>
+                <NavLink to='/list-product/1'>
                     Sản phẩm
                 </NavLink>
-                <NavLink to='/list-product/combo'>
+                <NavLink to='/list-product/2'>
                     Quà tặng
                 </NavLink>
             </div>
@@ -51,7 +52,7 @@ const SideBar = () => {
                     <input
                         type="range"
                         min='10000'
-                        max='10000000'
+                        max='700000'
                         value={priceSlider}
                         onChange={handlePriceSlider}
                         ref={sliderRef}
@@ -60,27 +61,29 @@ const SideBar = () => {
             </div>
 
             <div className="combo-product">
-                <div className="title">
-                    <h3>Set được yêu thích</h3>
-                    <div className="line"></div>
-                </div>
-                <div className="content">
-                    <div className="product">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_47_ur7mcw.svg" alt="product" />
+                <div className="combo-product">
+                    <div className="title">
+                        <h3>Set được yêu thích</h3>
+                        <div className="line"></div>
                     </div>
-                    <div className="product">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_68_p6b67s.svg" alt="product" />
-                    </div>
-                    <div className="product">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_69_u0ewxp.svg" alt="product" />
-                    </div>
-                    <div className="product">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_70_vt0nye.svg" alt="product" />
+                    <div className="content">
+                        <div className="product">
+                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_47_ur7mcw.svg" alt="product" />
+                        </div>
+                        <div className="product">
+                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_68_p6b67s.svg" alt="product" />
+                        </div>
+                        <div className="product">
+                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_69_u0ewxp.svg" alt="product" />
+                        </div>
+                        <div className="product">
+                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_70_vt0nye.svg" alt="product" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default SideBar;

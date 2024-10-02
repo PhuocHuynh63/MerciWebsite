@@ -26,8 +26,8 @@ const Header = () => {
             <nav className="navbar-center d-flex justify-content-center align-items-center">
                 <ul className="d-flex">
                     <li><NavLink to="/about-us">VỀ CHÚNG TÔI</NavLink></li>
-                    <li><NavLink to="/list-product/:slug">SẢN PHẨM</NavLink></li>
-                    <li><NavLink to="/about-us">QUÀ TẶNG</NavLink></li>
+                    <li><NavLink to="/list-product/1">SẢN PHẨM</NavLink></li>
+                    <li><NavLink to="/list-product/2">QUÀ TẶNG</NavLink></li>
                 </ul>
 
                 <div className="navbar-right">
