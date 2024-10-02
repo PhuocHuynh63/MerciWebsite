@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ProductDetail.scss';
 import DashboardStar from '../../components/dashboardStar/DashboardStar';
 import CommentModal from './commentModal/CommentModal';
 import ListComment from '../../components/listComment/ListComment';
+import { merci } from '../../service/merciSrc';
+import { useParams } from 'react-router-dom';
 
-const ProductDetail = (props) => {
-    const { slug } = props;
+const ProductDetail = () => {
+    const { id } = useParams();
 
+    /**
+     * Call API product detail
+     */
+    const [productDetail, setProductDetail] = useState({});
+    useEffect(() => {
+        merci.getProductDetail(id)
+            .then((res) => {
+                setProductDetail(res.data.data);
+            });
+    }, [id]);
+
+    console.log(productDetail);
+
+    //-------------------End call API product detail-------------------//
 
     /**
      * Modal Feedback
@@ -86,9 +102,9 @@ const ProductDetail = (props) => {
     /**
      * Scroll to top when component is mounted
      */
-    // useEffect(() => {
-    //     window.scrollTo(0, 300);
-    // }, []);
+    useEffect(() => {
+        window.scrollTo(0, 300);
+    }, []);
     //----------------End scroll to top------------------//
 
 
@@ -116,16 +132,18 @@ const ProductDetail = (props) => {
         <div className="product-detail">
             <div className="container product">
                 <div className="row d-flex justify-content-around">
+
                     <div className="col-6 img">
                         <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724501740/Rectangle_34_oryboz.svg" alt="" />
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724501913/SET_THU%E1%BB%B6_H%E1%BB%92NG_1_ie6gqc.svg" alt="" />
+                        <img src={productDetail.image} alt="" />
                     </div>
 
                     <div className="col-6 detail">
                         <div className="text">
-                            <span>SET QUÀ TẶNG THUỶ HỒNG</span>
+                            <span>{productDetail.productName}</span>
                             <p>Miễn phí giao hàng | Giao hàng 1-2 ngày - TP. Hồ Chí Minh</p>
-                            <p>449.000đ</p>
+                            <span>{productDetail?.salePrice?.toLocaleString()}đ</span>
+                            <span>{productDetail.salePrice === productDetail.price ? 'hide' : productDetail?.price?.toLocaleString()}đ</span>
                         </div>
 
                         <div className="quantity">
@@ -157,7 +175,7 @@ const ProductDetail = (props) => {
                 </div>
                 <div className="title">Mô tả sản phẩm</div>
                 <div className="text">
-                    <span><strong>Tinh dầu sả chanh</strong> là sản phẩm thiên nhiên tinh khiết, chiết xuất từ sả chanh tươi ngon. Với hương thơm tươi mát, tinh dầu này mang lại cảm giác thư giãn và nhiều lợi ích cho sức khỏe như khử mùi, làm sạch không khí, giảm căng thẳng, chăm sóc da và xua đuổi côn trùng. Sử dụng tinh dầu bằng cách nhỏ vài giọt vào máy khuếch tán, pha loãng với dầu nền để massage, hoặc nhỏ vào bồn tắm để thư giãn. Tinh dầu sả chanh 5ml là lựa chọn hoàn hảo để mang lại hương thơm tự nhiên và lợi ích sức khỏe cho cuộc sống của bạn.</span>
+                    <span>{productDetail.description}</span>
                 </div>
             </div>
 

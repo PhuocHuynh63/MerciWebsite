@@ -8,13 +8,15 @@
 
         .img {
             position: relative;
-            width: 34%;
+            width: 33%;
 
             img {
                 &:nth-child(2) {
                     position: absolute;
-                    top: 45%;
-                    left: 52%;
+                    top: 49%;
+                    left: 53%;
+                    height: 100%;
+                    width: 100%;
                     transform: translate(-50%, -50%);
                 }
             }
@@ -25,27 +27,46 @@
                 margin-top: 50px;
 
                 span {
-                    font-family: 'Montserrat', sans-serif;
                     font-size: 60px;
                     font-weight: 600;
                     color: #004AAD;
                 }
 
                 p {
+                    font-family: 'Montserrat', sans-serif;
+
                     &:nth-child(2) {
                         font-size: 16px;
                         margin-top: 10px;
                     }
+                }
 
-                    &:last-child {
+                span {
+                    font-family: 'Montserrat', sans-serif;
+
+                    &.hide {
+                        display: none;
+                    }
+
+                    &:nth-child(3) {
                         font-size: 60px;
                         color: #004AAD;
                         font-weight: bold;
+                    }
+
+                    &:nth-child(4) {
+                        margin-left: 30px;
+                        font-size: 25px;
+                        text-decoration: line-through;
+                        color: #727272;
+                        font-weight: 500;
                     }
                 }
             }
 
             .quantity {
+                display: flex;
+
                 button {
                     padding: 0;
                     width: 45px;
@@ -161,7 +182,6 @@
         }
 
         .feedback {
-
             .star {
 
                 #star-1,
@@ -202,6 +222,7 @@
                         height: 35px;
                         padding: 20px 8px;
                         width: 280px;
+                        margin-right: 25px;
                         color: #2e2e2e;
 
                         &:focus {

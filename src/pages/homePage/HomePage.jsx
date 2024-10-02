@@ -1,7 +1,43 @@
 import { Link } from 'react-router-dom';
 import './HomePage.scss';
+import { useEffect, useState } from 'react';
+import { merci } from '../../service/merciSrc';
 
 const HomePage = () => {
+
+  /**
+   * Call API products
+   */
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    merci.getProducts()
+      .then((res) => {
+        setProducts(res.data.data)
+      });
+  }, []);
+  //-------------------End call API products-------------------//
+
+
+  /**
+   * Filter product to show on homepage (8 products)
+   */
+  const filterProduct = products.filter((product, index) => {
+    return index < 8;
+  })
+  //-------------------End filter product-------------------//
+
+
+  /**
+   * Filter new product to show on homepage (3 products)
+   */
+  const revered = products.reverse();
+  const filterNewdProduct = revered.filter((product, index) => {
+    if (product.createdAt)
+      return index < 3;
+  })
+  //-------------------End filter new product-------------------//
+
   return (
     <div className='homepage'>
       {/* carousel */}
@@ -45,35 +81,16 @@ const HomePage = () => {
         <div className='title'>PHỤ KIỆN</div>
 
         <div className='container product d-flex justify-content-center'>
-          <div className='row'>
-            <div className='product-item col-3'>
-              <Link to='/product/:slug'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-              </Link>
-            </div>
-
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-3'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
+          <div className='row d-flex justify-content-between'>
+            {filterProduct.map((product, index) => {
+              return (
+                <div key={index} className='product-item col-3'>
+                  <Link to={`/product/${product.idProduct}`}>
+                    <img src={product.image} />
+                  </Link>
+                </div>
+              )
+            })}
           </div>
 
           <div className='product-more'>
@@ -89,15 +106,15 @@ const HomePage = () => {
 
         <div className='container product'>
           <div className='row d-flex justify-content-between'>
-            <div className='product-item col-4'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-4'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
-            <div className='product-item col-4'>
-              <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-            </div>
+            {filterNewdProduct.map((product, index) => {
+              return (
+                <div key={index} className='product-item col-4'>
+                  <Link to={`/product/${product.idProduct}`}>
+                    <img src={product.image} />
+                  </Link>
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className='product-more'>
