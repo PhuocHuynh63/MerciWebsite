@@ -94,7 +94,7 @@ const HomePage = () => {
           </div>
 
           <div className='product-more'>
-            <button>XEM THÊM</button>
+            <Link to='/list-product/1'> <button>Xem thêm</button></Link>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className='product-more'>
-          <button>XEM THÊM</button>
+          <Link to='/list-product/1'> <button>Xem thêm</button></Link>
         </div>
         <div className='background'>
           <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724207828/0310_843_1_1_csrrkv.svg" alt="" />
