@@ -20,6 +20,19 @@ const HomePage = () => {
 
 
   /**
+   * Call API combo
+   */
+  const [combo, setCombo] = useState([]);
+  useEffect(() => {
+    merci.getCombo()
+      .then((res) => {
+        setCombo(res.data.data)
+      });
+  }, []);
+  //-------------------End call API combo-------------------//
+
+
+  /**
    * Filter product to show on homepage (8 products)
    */
   const filterProduct = products.filter((product, index) => {
@@ -85,7 +98,7 @@ const HomePage = () => {
             {filterProduct.map((product, index) => {
               return (
                 <div key={index} className='product-item col-3'>
-                  <Link to={`/product/${product.idProduct}`}>
+                  <Link to={`/product/${product.slug}`}>
                     <img src={product.image} />
                   </Link>
                 </div>
@@ -109,7 +122,7 @@ const HomePage = () => {
             {filterNewdProduct.map((product, index) => {
               return (
                 <div key={index} className='product-item col-4'>
-                  <Link to={`/product/${product.idProduct}`}>
+                  <Link to={`/product/${product.slug}`}>
                     <img src={product.image} />
                   </Link>
                 </div>
@@ -132,37 +145,20 @@ const HomePage = () => {
         </div>
         <div className='container product'>
           <div className='position row-cols-1'>
-            <div className='item'>
-              <div className='product-item col-3 d-flex flex-column'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-              </div>
-              <p>SET MƯỢT MÀ</p>
-              <p>299.000đ</p>
-            </div>
-
-            <div className='item'>
-              <div className='product-item col-3'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-              </div>
-              <p>SET MƯỢT MÀ</p>
-              <p>299.000đ</p>
-            </div>
-
-            <div className='item'>
-              <div className='product-item col-3'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-              </div>
-              <p>SET MƯỢT MÀ</p>
-              <p>299.000đ</p>
-            </div>
-
-            <div className='item'>
-              <div className='product-item col-3'>
-                <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" />
-              </div>
-              <p>SET MƯỢT MÀ</p>
-              <p>299.000đ</p>
-            </div>
+            {combo.map((product, index) => {
+              return (
+                <div key={index} className='item'>
+                  <Link to={`/combo/${product.slug}`} style={{ zIndex: '1' }}>
+                    <div className='product-item col-3 d-flex flex-column'>
+                      <img src={product.image} />
+                    </div>
+                  </Link>
+                  <p>{product.name}</p>
+                  <p>{product.price.toLocaleString()}đ</p>
+                </div>
+              )
+            })
+            }
           </div>
         </div>
         <div className="background-cloud">

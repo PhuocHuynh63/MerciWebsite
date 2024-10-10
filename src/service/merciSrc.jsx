@@ -10,12 +10,20 @@ export const merci = {
     },
 
     getProductDetailId: (id) => {
-        return https.get(`/Products/${id}`);
+        return https.get(`/Products/id=${id}`);
     },
 
     getProductsByCategory: (categoryId) => {
         return https.get(`/Categories/${categoryId}`);
-    }
+    },
+
+    getCombo: () => {
+        return https.get('/Combos');
+    },
+
+    getComboDetail: (slug) => {
+        return https.get(`/Combos/${slug}`);
+    },
 }
 
 

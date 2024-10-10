@@ -26,13 +26,19 @@ const ListProduct = () => {
     useEffect(() => {
         merci.getProductsByCategory(id)
             .then(res => {
-                setProducts(res.data.data.products);
-                setFilteredProducts(res.data.data.products); // Khởi tạo danh sách sản phẩm
+                if (id == 1) {
+                    setProducts(res.data.data.products);
+                    setFilteredProducts(res.data.data.products);
+                } else if (id == 2) {
+                    setProducts(res.data.data.combos);
+                    setFilteredProducts(res.data.data.combos);
+                }
             })
             .catch(err => {
                 console.log(err);
             });
     }, [id]);
+
 
     /**
      * Lọc sản phẩm theo giá
@@ -85,10 +91,10 @@ const ListProduct = () => {
                                 <div className="product">
                                     <div className="background">
                                         <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
-                                        <Link to={`/product/${product.idProduct}`}>
+                                        <Link to={`/product/${product.slug}`}>
                                             <div className="product-info">
                                                 <img src={product.image} alt="product" />
-                                                <p>{product.productName}</p>
+                                                <p>{product.name}</p>
                                                 <p>{product?.salePrice?.toLocaleString()}đ</p>
                                             </div>
                                         </Link>

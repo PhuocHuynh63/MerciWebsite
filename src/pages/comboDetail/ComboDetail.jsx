@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './ProductDetail.scss';
+import './ComboDetail.scss';
 import DashboardStar from '../../components/dashboardStar/DashboardStar';
 import CommentModal from './commentModal/CommentModal';
 import ListComment from '../../components/listComment/ListComment';
@@ -7,22 +7,12 @@ import { merci } from '../../service/merciSrc';
 import { useParams } from 'react-router-dom';
 import { notification } from 'antd';
 
-const ProductDetail = () => {
+const ComboDetail = () => {
     const { slug } = useParams();
 
     /**
-     * Call API product detail
+     * Call API combo detail
      */
-    const [productDetail, setProductDetail] = useState({});
-    useEffect(() => {
-        merci.getProductDetail(slug)
-            .then((res) => {
-                setProductDetail(res.data.data);
-            });
-    }, [slug]);
-    //-------------------End call API product detail-------------------//
-
-
     const [comboDetail, setComboDetail] = useState({});
     useEffect(() => {
         merci.getComboDetail(slug)
@@ -30,6 +20,9 @@ const ProductDetail = () => {
                 setComboDetail(res.data.data);
             });
     }, [slug]);
+    console.log(comboDetail);
+
+    //-------------------End call API combo detail-------------------//
 
 
     /**
@@ -155,19 +148,19 @@ const ProductDetail = () => {
         // }
 
         const item = {
-            idProduct: productDetail.idProduct,
-            idCategory: productDetail.idCategory,
-            salePrice: productDetail.salePrice,
-            image: productDetail.image,
-            productName: productDetail.name,
+            idCombo: comboDetail.idCombo,
+            idCategory: comboDetail.idCategory,
+            salePrice: comboDetail.salePrice,
+            image: comboDetail.image,
+            productName: comboDetail.name,
             quantity,
-            max: productDetail.quantity,
-            price: productDetail.price,
-            totalPrice: quantity * (productDetail.salePrice || productDetail.price),
+            max: comboDetail.quantity,
+            price: comboDetail.price,
+            totalPrice: quantity * (comboDetail.salePrice || comboDetail.price),
         };
 
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const existingItemIndex = cartItems.findIndex(cartItem => cartItem.idProduct === item.idProduct);
+        const existingItemIndex = cartItems.findIndex(cartItem => cartItem.idCombo === item.idCombo);
 
         if (existingItemIndex > -1) {
             const existingItem = cartItems[existingItemIndex];
@@ -241,18 +234,19 @@ const ProductDetail = () => {
 
                     <div className="col-6 img">
                         <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724501740/Rectangle_34_oryboz.svg" alt="" />
-                        <img src={productDetail.image} alt="" />
+                        <img src={comboDetail.image} alt="" />
                     </div>
 
                     <div className="col-6 detail">
                         <div className="text">
-                            <span>{productDetail.productName}</span>
+                            <span>{comboDetail.name}</span>
                             <p>Miễn phí giao hàng | Giao hàng 1-2 ngày - TP. Hồ Chí Minh</p>
-                            <span>{productDetail?.salePrice?.toLocaleString()}đ</span>
+                            <span>{comboDetail?.salePrice?.toLocaleString()}đ</span>
 
-                            {productDetail && productDetail.salePrice !== null && productDetail.salePrice !== 0 && productDetail.price !== 0 ? (
-                                <span>{productDetail.salePrice !== productDetail.price ? productDetail.price.toLocaleString() + 'đ' : null}</span>
+                            {comboDetail && comboDetail.salePrice !== null && comboDetail.salePrice !== 0 && comboDetail.price !== 0 ? (
+                                <span>{comboDetail.salePrice !== comboDetail.price ? comboDetail.price.toLocaleString() + 'đ' : null}</span>
                             ) : null}
+
                         </div>
 
                         <div className="quantity">
@@ -283,7 +277,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="title">Mô tả sản phẩm</div>
                 <div className="text">
-                    <span>{productDetail.description}</span>
+                    <span>{comboDetail.description}</span>
                 </div>
             </div>
 
@@ -354,4 +348,4 @@ const ProductDetail = () => {
     );
 }
 
-export default ProductDetail;
+export default ComboDetail;
