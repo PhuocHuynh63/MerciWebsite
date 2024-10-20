@@ -5,7 +5,7 @@ const ListComment = (props) => {
     const { handleViewStarRating } = props;
 
     return (
-        <div className="comment">
+        <div className="comment-component">
             <div className="title">
                 <span>Đánh giá của khách hàng</span>
 

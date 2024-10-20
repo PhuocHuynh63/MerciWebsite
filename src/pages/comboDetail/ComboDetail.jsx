@@ -228,25 +228,26 @@ const ComboDetail = () => {
     //------End------//
 
     return (
-        <div className="product-detail">
+        <div className="combo-detail">
             <div className="container product">
                 <div className="row d-flex justify-content-around">
 
-                    <div className="col-6 img">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724501740/Rectangle_34_oryboz.svg" alt="" />
+                    <div className="col-5 img">
                         <img src={comboDetail.image} alt="" />
                     </div>
 
-                    <div className="col-6 detail">
+                    <div className="col-7 detail">
                         <div className="text">
-                            <span>{comboDetail.name}</span>
+                            <span className='title-name'>{comboDetail.name}</span>
                             <p>Miễn phí giao hàng | Giao hàng 1-2 ngày - TP. Hồ Chí Minh</p>
-                            <span>{comboDetail?.salePrice?.toLocaleString()}đ</span>
 
-                            {comboDetail && comboDetail.salePrice !== null && comboDetail.salePrice !== 0 && comboDetail.price !== 0 ? (
-                                <span>{comboDetail.salePrice !== comboDetail.price ? comboDetail.price.toLocaleString() + 'đ' : null}</span>
-                            ) : null}
+                            <div className="price">
+                                <span>{comboDetail?.salePrice?.toLocaleString()}đ</span>
 
+                                {comboDetail && comboDetail.salePrice !== null && comboDetail.salePrice !== 0 && comboDetail.price !== 0 ? (
+                                    <span>{comboDetail.salePrice !== comboDetail.price ? comboDetail.price.toLocaleString() + 'đ' : null}</span>
+                                ) : null}
+                            </div>
                         </div>
 
                         <div className="quantity">
@@ -255,6 +256,7 @@ const ComboDetail = () => {
                                 type="text"
                                 onChange={handleQuantityChange}
                                 value={quantity}
+                                max={comboDetail.quantity}
                                 onKeyPress={handleKeyPress}
                                 onMouseLeave={handleMouseLeave}
                             />
@@ -265,16 +267,10 @@ const ComboDetail = () => {
                             <button className="add-to-cart" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                         </div>
                     </div>
-                    <div className="background">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
-                    </div>
                 </div>
             </div>
 
             <div className="container product-description">
-                <div className="background">
-                    <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
-                </div>
                 <div className="title">Mô tả sản phẩm</div>
                 <div className="text">
                     <span>{comboDetail.description}</span>

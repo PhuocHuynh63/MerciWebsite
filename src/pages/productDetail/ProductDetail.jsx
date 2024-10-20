@@ -78,7 +78,11 @@ const ProductDetail = () => {
         if (isNaN(value) || value < 0) {
             setQuantity(1);
         } else {
-            setQuantity(value);
+            if (value > productDetail.quantity) {
+                setQuantity(productDetail.quantity);
+            } else {
+                setQuantity(value);
+            }
         }
     }
 
@@ -99,7 +103,11 @@ const ProductDetail = () => {
     //Increase or decrease quantity
     const toggleQuantity = (value) => {
         if (value === '+') {
-            setQuantity(prevQuantity => prevQuantity + 1);
+            if (quantity < productDetail.quantity) {
+                setQuantity(prevQuantity => prevQuantity + 1);
+            } else {
+                setQuantity(productDetail.quantity);
+            }
         } else if (value === '-' && quantity > 1) {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
@@ -239,20 +247,22 @@ const ProductDetail = () => {
             <div className="container product">
                 <div className="row d-flex justify-content-around">
 
-                    <div className="col-6 img">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724501740/Rectangle_34_oryboz.svg" alt="" />
+                    <div className="col-5 img">
                         <img src={productDetail.image} alt="" />
                     </div>
 
-                    <div className="col-6 detail">
+                    <div className="col-7 detail">
                         <div className="text">
-                            <span>{productDetail.productName}</span>
+                            <span>{productDetail.name}</span>
                             <p>Miễn phí giao hàng | Giao hàng 1-2 ngày - TP. Hồ Chí Minh</p>
-                            <span>{productDetail?.salePrice?.toLocaleString()}đ</span>
 
-                            {productDetail && productDetail.salePrice !== null && productDetail.salePrice !== 0 && productDetail.price !== 0 ? (
-                                <span>{productDetail.salePrice !== productDetail.price ? productDetail.price.toLocaleString() + 'đ' : null}</span>
-                            ) : null}
+                            <div className="price">
+                                <span>{productDetail?.salePrice?.toLocaleString()}đ</span>
+
+                                {productDetail && productDetail.salePrice !== null && productDetail.salePrice !== 0 && productDetail.price !== 0 ? (
+                                    <span>{productDetail.salePrice !== productDetail.price ? productDetail.price.toLocaleString() + 'đ' : null}</span>
+                                ) : null}
+                            </div>
                         </div>
 
                         <div className="quantity">
@@ -261,6 +271,7 @@ const ProductDetail = () => {
                                 type="text"
                                 onChange={handleQuantityChange}
                                 value={quantity}
+                                max={productDetail.quantity}
                                 onKeyPress={handleKeyPress}
                                 onMouseLeave={handleMouseLeave}
                             />
@@ -271,16 +282,10 @@ const ProductDetail = () => {
                             <button className="add-to-cart" onClick={handleAddToCart}>Thêm vào giỏ hàng</button>
                         </div>
                     </div>
-                    <div className="background">
-                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
-                    </div>
                 </div>
             </div>
 
             <div className="container product-description">
-                <div className="background">
-                    <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724761940/m%C3%A2y_1_tcmrxx.svg" alt="" />
-                </div>
                 <div className="title">Mô tả sản phẩm</div>
                 <div className="text">
                     <span>{productDetail.description}</span>
