@@ -1,44 +1,14 @@
 import { Modal } from "react-bootstrap"
 import './Checkout.scss';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { addressVietNam } from "../../../service/merciSrc";
+import { addressVietNam, merci } from "../../../service/merciSrc";
+import { toast } from "react-toastify";
 
 const Checkout = (props) => {
-    const { show, handleClose } = props;
+    const { show, handleClose, cartItems, totalAmount } = props;
 
-    /**
-     * Handle Form
-     */
-    const [errors, setErrors] = useState({})
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        note: "",
-        address: "",
-        province: "",
-        district: "",
-        ward: "",
-        paymentMethod: "COD"
-    })
-
-
-    //Handle Submit form
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            const checkoutData = {
-                formData: formData,
-                status: formData.paymentMethod === 'COD' ? 'Chờ xác nhận' : 'Đang được xử lý',
-                // totalAmount: 0,
-            }
-            console.log(checkoutData);
-        }
-    }
-    //----------------End Handle Submit form----------------//
-    //----------------End Handle Form----------------//
-
+    const navigate = useNavigate();
 
     /**
      * Toggle payment method
@@ -137,6 +107,7 @@ const Checkout = (props) => {
     //----------------Province----------------//
     const [provinces, setProvinces] = useState([]);
     const [selectProvince, setSelectProvince] = useState(null);
+    const [formDataProvince, setFormDataProvince] = useState(null);
 
     useEffect(() => {
         addressVietNam.getProvinces()
@@ -151,6 +122,7 @@ const Checkout = (props) => {
 
     const handleSelectProvince = (e) => {
         setSelectProvince(e.target.value);
+        setFormDataProvince(e.target.options[e.target.selectedIndex].text);
         setDistricts([]);
         setWards([]);
         setFormData({
@@ -172,6 +144,8 @@ const Checkout = (props) => {
     //----------------District----------------//
     const [districts, setDistricts] = useState([]);
     const [selectDistrict, setSelectDistrict] = useState(null);
+    const [formDataDistrict, setFormDataDistrict] = useState(null);
+
 
     useEffect(() => {
         if (selectProvince) {
@@ -187,6 +161,7 @@ const Checkout = (props) => {
 
     const handleSelectDistrict = (e) => {
         setSelectDistrict(e.target.value);
+        setFormDataDistrict(e.target.options[e.target.selectedIndex].text);
         setWards([]);
         setFormData({
             ...formData,
@@ -206,6 +181,7 @@ const Checkout = (props) => {
     //----------------Ward----------------//
     const [wards, setWards] = useState([]);
     const [selectWard, setSelectWard] = useState(null);
+    const [formDataWard, setFormDataWard] = useState(null);
 
     useEffect(() => {
         if (selectDistrict) {
@@ -222,6 +198,7 @@ const Checkout = (props) => {
 
     const handleSelectWard = (e) => {
         setSelectWard(e.target.value);
+        setFormDataWard(e.target.options[e.target.selectedIndex].text);
         setFormData({
             ...formData,
             ward: e.target.value
@@ -235,6 +212,64 @@ const Checkout = (props) => {
         }
     }
     //----------------End Address----------------//
+
+
+    /**
+    * Handle Form
+    */
+    const [errors, setErrors] = useState({})
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        note: "",
+        address: "",
+        province: "",
+        district: "",
+        ward: "",
+        paymentMethod: "COD"
+    })
+
+
+    //Handle Submit form
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const shippingAddress = `${formData.address}, ${formDataWard}, ${formDataDistrict}, ${formDataProvince}`;
+
+        if (validate()) {
+            const checkoutData = {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                shippingAddress: shippingAddress,
+                totalAmount: totalAmount,
+                orderType: formData.paymentMethod,
+                item: cartItems.map(item => ({
+                    idProduct: item.idProduct,
+                    quantity: item.quantity,
+                })),
+                note: formData.note,
+                // totalAmount: 0,
+            }
+
+            merci.postOrder(checkoutData)
+                .then((res) => {
+                    console.log(res.data);
+                    handleClose();
+                    localStorage.removeItem('cartItems');
+                    toast.success("Đặt hàng thành công");
+                    navigate('/')
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error("Đặt hàng thất bại");
+                })
+        }
+    }
+    //----------------End Handle Submit form----------------//
+    //----------------End Handle Form----------------//
+
+
 
 
     return (
@@ -274,7 +309,7 @@ const Checkout = (props) => {
                                 </div>
 
                                 <div className="checkout-info__form__input">
-                                    <input type="text" className="note" placeholder="Ghi chú" />
+                                    <input type="text" name="note" onChange={handleChange} value={formData.note} className="note" placeholder="Ghi chú" />
                                 </div>
                                 {/* End Information */}
 
@@ -344,10 +379,10 @@ const Checkout = (props) => {
                                             <span>Thanh toán khi nhận hàng (COD)</span>
                                             <img src="https://cdn-icons-png.flaticon.com/512/9198/9198191.png" alt="" />
                                         </div>
-                                        <div className="momo" onClick={() => handleSelectPaymentMethod('momo')} >
-                                            <input type="radio" checked={paymentMethod === 'momo'} readOnly />
-                                            <span>Thanh toán online qua ví MoMo</span>
-                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725006693/1111111111111111111_1_bzt2tu.svg" alt="" />
+                                        <div className="vnpay" onClick={() => handleSelectPaymentMethod('vnpay')} >
+                                            <input type="radio" checked={paymentMethod === 'vnpay'} readOnly />
+                                            <span>Thanh toán online qua ví VNPay</span>
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1v7T287-ikP1m7dEUbs2n1SbbLEqkMd1ZA&s" alt="" />
                                         </div>
                                     </div>
                                 </div>

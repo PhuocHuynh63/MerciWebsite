@@ -4,10 +4,11 @@ import { BASE_URL, configHeader } from "./config";
 export const userService = {
     postLogin: async (loginForm) => {
         try {
-            const response = await axios.post(`${BASE_URL}/login`, null, {
-                params: loginForm,  // Using params to match @RequestParam in backend
+            const response = await axios.post(`${BASE_URL}Auth/Login`, loginForm, {
                 headers: configHeader()
             });
+            console.log('response', response.data);
+
             return response.data;
         } catch (error) {
             console.error('Error logging in:', error);

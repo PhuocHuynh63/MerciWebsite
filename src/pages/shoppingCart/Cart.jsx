@@ -18,15 +18,20 @@ const Cart = () => {
     * Handle input quantity
     * Chưa xử lý trường hợp nhập quá số lượng có trong kho (Đợi back-end)
     */
-    const [quantity, setQuantity] = useState(1);
-    const handleQuantityChange = (e) => {
+    const handleQuantityChange = (e, idProduct) => {
         const value = parseInt(e.target.value);
-        if (isNaN(value) || value < 0) {
-            setQuantity(1);
-        } else {
-            setQuantity(value);
-        }
-    }
+        const updatedCartItems = cartItems.map(item => {
+            if (item.idProduct === idProduct) {
+                const newQuantity = isNaN(value) || value <= 0 ? 1 : Math.min(value, item.max); // Limit the value to item.max
+                return { ...item, quantity: newQuantity, totalPrice: (item.salePrice || item.price) * newQuantity };
+            }
+            return item;
+        });
+        setCartItems(updatedCartItems);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    };
+
+
 
     //Only allow number input
     const handleKeyPress = (e) => {
@@ -42,14 +47,21 @@ const Cart = () => {
         }
     }
 
-    //Increase or decrease quantity
-    const toggleQuantity = (value) => {
-        if (value === '+') {
-            setQuantity(prevQuantity => prevQuantity + 1);
-        } else if (value === '-' && quantity > 1) {
-            setQuantity(prevQuantity => prevQuantity - 1);
-        }
-    }
+    // Increase or decrease quantity of specific product
+    const updateQuantity = (idProduct, change) => {
+        const updatedCartItems = cartItems.map(item => {
+            if (item.idProduct === idProduct) {
+                const newQuantity = item.quantity + (change === "+1" ? 1 : -1);
+                if (newQuantity > 0 && newQuantity <= item.max) {
+                    return { ...item, quantity: newQuantity, totalPrice: (item.salePrice || item.price) * newQuantity };
+                }
+            }
+            return item;
+        }).filter(item => item.quantity > 0); // Remove items with 0 quantity
+        setCartItems(updatedCartItems);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    };
+
     //-------------End handle input quantity-------------//
 
 
@@ -66,8 +78,8 @@ const Cart = () => {
 
 
     // Remove item from cart
-    const handleRemoveItem = (productId) => {
-        const updatedCartItems = cartItems.filter(item => item.productId !== productId);
+    const handleRemoveItem = (idProduct) => {
+        const updatedCartItems = cartItems.filter(item => item.idProduct !== idProduct);
         setCartItems(updatedCartItems);
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     }
@@ -85,7 +97,7 @@ const Cart = () => {
 
     return (
         <div className="cart">
-            <Checkout show={show} handleClose={handleClose} />
+            <Checkout show={show} handleClose={handleClose} cartItems={cartItems} totalAmount={getTotalPrice()} />
 
             {cartItems.length === 0 ?
                 <div className="empty-cart">
@@ -123,19 +135,20 @@ const Cart = () => {
                                         <td>{item.productName}</td>
                                         <td>{item.salePrice.toLocaleString()}đ</td>
                                         <td className='quantity'>
-                                            <button value="-" onClick={() => toggleQuantity("-")}>-</button>
+                                            <button onClick={() => updateQuantity(item.idProduct, "-1")}>-</button>
                                             <input
                                                 type="text"
-                                                onChange={handleQuantityChange}
+                                                onChange={(e) => handleQuantityChange(e, item.idProduct)}
                                                 value={item.quantity}
                                                 onKeyPress={handleKeyPress}
                                                 onMouseLeave={handleMouseLeave}
                                             />
-                                            <button value="+" onClick={() => toggleQuantity("+")}>+</button>
+                                            <button onClick={() => updateQuantity(item.idProduct, "+1")}>+</button>
                                         </td>
-                                        <td> {(item.quantity * item.salePrice).toLocaleString()}đ</td>
+
+                                        <td><span style={{ display: 'inline-block', width: '100px' }}>{(item.quantity * item.salePrice).toLocaleString()}đ</span></td>
                                         <td>
-                                            <span>Xoá</span>
+                                            <span onClick={() => handleRemoveItem(item.idProduct)}>Xoá</span>
                                         </td>
                                     </tr>
                                 </tbody>
