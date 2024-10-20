@@ -14,12 +14,14 @@ import ChangePassword from './pages/changePasswordPage/ChangePassword';
 import PurchaseOrder from './pages/purchaseOrder/PurchaseOrder';
 import Dashboard from './pages/adminPage/dashboard/Dashboard';
 import ComboDetail from './pages/comboDetail/ComboDetail';
+import RegisterPage from './pages/registerPage/RegisterPage';
+import LoginPage from './pages/loginPage/LoginPage/LoginPage'
 
 
 function App() {
 
   return (
-    <div className="min-h-screen">
+    <>
       <BrowserRouter>
         <Routes>
           <Route path='*' element={<Layout Component={NotFound} />} />
@@ -29,6 +31,8 @@ function App() {
           <Route path='/combo/:slug' element={<Layout Component={ComboDetail} />} />
           <Route path='/cart' element={<Layout Component={Cart} />} />
           <Route path='/list-product/:id' element={<Layout Component={ListProduct} />} />
+          <Route path='/signup' element={<Layout Component={RegisterPage} />} />
+          <Route path='/signin' element={<Layout Component={LoginPage} />} />
 
           {/* Profile */}
           <Route path='/profile' element={<LayoutProfileUser Component={ProfileUser} />} />
@@ -36,12 +40,13 @@ function App() {
           <Route path='/purchaseorder' element={<LayoutProfileUser Component={PurchaseOrder} />} />
           {/* End Profile */}
 
+
           {/* Admin */}
           <Route path='/admin' element={<Layout Component={Dashboard} />} />
           {/* End Admin */}
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   )
 }
 

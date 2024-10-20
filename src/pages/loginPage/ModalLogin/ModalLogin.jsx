@@ -28,8 +28,10 @@ const ModalLogin = ({ show, handleClose }) => {
         userService
             .postLogin(values)
             .then((response) => {
-                if (response.success) {
-                    localService.set(response.data); // Lưu token vào local storage
+                if (response.status === 200) {
+                    console.log("API thành công:", response.data);
+
+                    localService.set(response.data.accessToken); // Lưu token vào local storage
                     dispatch(
                         setLoginAction({ token: response.data, role: response.role })
                     ); // Lưu token và vai trò vào redux
@@ -92,6 +94,9 @@ const ModalLogin = ({ show, handleClose }) => {
                                 <div className="card border-light-subtle shadow-sm">
                                     <div className="row g-0">
                                         <div className="col-12 col-md-6">
+                                            <img
+                                                className="img-fluid rounded-start w-100 h-100 object-fit-cover"
+                                                src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1729002218/17f0c773-deea-42ad-9a14-5754cd9b2d97_at5or2.webp" alt="" />
                                         </div>
                                         <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                                             <Button
@@ -123,7 +128,7 @@ const ModalLogin = ({ show, handleClose }) => {
                                                             <div className="col-12">
                                                                 <div className="form-floating mb-3">
                                                                     <Form.Item
-                                                                        name="username"
+                                                                        name="userName"
                                                                         rules={[
                                                                             {
                                                                                 required: true,
@@ -133,7 +138,7 @@ const ModalLogin = ({ show, handleClose }) => {
                                                                         noStyle
                                                                     >
                                                                         <Input
-                                                                            id="username"
+                                                                            id="userName"
                                                                             type="text"
                                                                             className="form-control"
                                                                             placeholder="Tên đăng nhập"
@@ -144,7 +149,7 @@ const ModalLogin = ({ show, handleClose }) => {
                                                                         htmlFor="username"
                                                                         className="form-label"
                                                                     >
-                                                                        Tên đăng nhập
+                                                                        Email
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -213,13 +218,13 @@ const ModalLogin = ({ show, handleClose }) => {
                                                                 >
                                                                     Tạo tài khoản
                                                                 </span>
-                                                                <span
+                                                                {/* <span
                                                                     className="link-secondary text-decoration-none"
                                                                     onClick={handleForgot}
                                                                     style={{ cursor: "pointer" }}
                                                                 >
                                                                     Quên mật khẩu
-                                                                </span>
+                                                                </span> */}
                                                             </div>
                                                         </div>
                                                     </div>

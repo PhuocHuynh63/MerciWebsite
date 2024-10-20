@@ -6,7 +6,7 @@ export const merci = {
     },
 
     getProductDetail: (slug) => {
-        return https.get(`/Products/${slug}`);
+        return https.get(`/Products/slug/${slug}`);
     },
 
     getProductDetailId: (id) => {
@@ -22,7 +22,15 @@ export const merci = {
     },
 
     getComboDetail: (slug) => {
-        return https.get(`/Combos/${slug}`);
+        return https.get(`/Combos/slug/${slug}`);
+    },
+
+    postRegister: (data) => {
+        return https.post('/Auth/Register', data);
+    },
+
+    postOrder: (data) => {
+        return https.post('/Orders', data);
     },
 }
 
