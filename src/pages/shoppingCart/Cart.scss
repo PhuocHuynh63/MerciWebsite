@@ -270,3 +270,162 @@
         }
     }
 }
+
+/* Media Query for screens less than 900px */
+@media screen and (max-width: 900px) {
+    .cart {
+        table {
+            scale: 0.8;
+            width: 100%;
+
+            thead {
+                display: none;
+                /* Hide the table header */
+            }
+
+            tbody {
+                border-radius: 4px;
+
+                tr {
+                    td:first-child {
+                        top: 60px
+                    }
+
+                    td:nth-child(2) {
+                        font-size: 20px;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+
+                    td {
+                        display: block;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px;
+                        border-bottom: 1px solid #f3f3f3;
+
+                        &:before {
+                            content: attr(data-label);
+                            /* Display data-label in the td */
+                            float: left;
+                            font-weight: bold;
+                        }
+
+                        &.quantity {
+                            input {
+                                width: 20px;
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        .total {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+
+            span {
+                font-size: 20px;
+            }
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-around;
+
+            button {
+                margin-left: 0px;
+
+                span {
+
+                    font-size: 15px;
+                }
+            }
+        }
+
+    }
+
+}
+
+/* Media Query for screens less than 500px */
+@media screen and (max-width: 500px) {
+    .cart {
+        table {
+
+            thead {
+                display: none;
+                /* Hide the table header */
+            }
+
+            tbody {
+                border-radius: 4px;
+
+                tr {
+                    td:first-child {
+                        top: 60px
+                    }
+
+                    td:nth-child(2) {
+                        font-size: 20px;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+
+                    td {
+                        display: block;
+                        text-align: center;
+                        padding: 10px;
+                        font-size: 14px;
+                        border-bottom: 1px solid #f3f3f3;
+
+                        &:before {
+                            content: attr(data-label);
+                            /* Display data-label in the td */
+                            float: left;
+                            font-weight: bold;
+                        }
+
+                        &.quantity {
+                            input {
+                                width: 20px;
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        .total {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+
+            span {
+                font-size: 20px;
+            }
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-around;
+
+            button {
+                margin-left: 0px;
+
+                span {
+
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+}

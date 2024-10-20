@@ -101,11 +101,11 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="container col-12 mt-5">
+        <div className="container col-12 mt-5" style={{ marginBottom: '50px' }}>
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={true} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className="row">
                 <div className="col-md-6">
-                    <img src='image_url' alt="Descriptive Text" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <img src='https://res.cloudinary.com/dwyzqcunj/image/upload/v1729438089/unnamed_kg9tml.png' alt="Descriptive Text" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: '4px' }} />
                 </div>
                 <div className="col-md-6">
                     <h2>Tham gia cùng chúng tôi</h2>

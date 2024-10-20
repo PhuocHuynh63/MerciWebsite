@@ -1,9 +1,105 @@
 import "./Dashboard.scss";
 import { useEffect, useState, useMemo } from "react";
 
-
-export default function AdminPage() {
+export default function Dashboard() {
     const [showModal, setShowModal] = useState(false);
+
+
+    /**
+     * Get order status API
+     */
+    // const handleStatusOrder = (orderId) => {
+    //     const payload = { orderId, status: "Đang được xử lý" };
+
+    //     meBeSrc.putStatusOrder(payload)
+    //         .then((res) => {
+    //             setOrder(prevOrders => prevOrders.map(order =>
+    //                 order.orderId === orderId ? { ...order, status: "Đang được xử lý" } : order
+    //             ));
+    //             setShowModal(true);
+    //             setTimeout(() => {
+    //                 setShowModal(false);
+    //             }, 2000);
+    //             console.log("Order status updated from AdminPage", res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log("Error updating order status from AdminPage", err);
+    //         });
+    // }
+    //-----End-----//
+
+
+    /**
+     * revenue calculation
+     * @returns revenue
+     */
+    // const [dailyRevenue, setDailyRevenue] = useState([]);
+
+    // const calculateRevenue = () => {
+    //     let completedOrders = order.filter((item) => item.status === "Đã giao");
+    //     let revenue = completedOrders.reduce((total, item) => total + item.totalAmount, 0);
+    //     return revenue.toLocaleString('vi-VN');
+    // }
+
+    // const calculateDailyRevenue = (orderData) => {
+    //     let completedOrders = orderData.filter((item) => item.status === "Đã giao");
+
+    //     let dailyRevenueData = completedOrders.reduce((acc, item) => {
+    //         let date = new Date(item.updatedAt); // Use updatedAt for the delivery date
+    //         let formattedDate = date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    //         if (!acc[formattedDate]) {
+    //             acc[formattedDate] = 0;
+    //         }
+    //         acc[formattedDate] += item.totalAmount;
+    //         return acc;
+    //     }, {});
+
+    //     let formattedDailyRevenueData = Object.keys(dailyRevenueData).map(date => ({
+    //         date,
+    //         revenue: dailyRevenueData[date]
+    //     }));
+
+    //     setDailyRevenue(formattedDailyRevenueData);
+    // }
+    //-----End-----//
+
+    /**
+     * Filter order by status
+     */
+    // const orderNeedConfirm = order.filter((item) => item.status === "Chờ xác nhận");
+    //-----End-----//
+
+
+    /**
+     * Pagination
+     */
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const ordersPerPage = 5;
+    // const indexOfLastOrder = currentPage * ordersPerPage;
+    // const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    // const currentOrders = orderNeedConfirm.slice(indexOfFirstOrder, indexOfLastOrder);
+
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // const pageNumbers = [];
+    // for (let i = 1; i <= Math.ceil(orderNeedConfirm.length / ordersPerPage); i++) {
+    //     pageNumbers.push(i);
+    // }
+    //-----End-----//
+
+    /**
+     * Handle tracking popup
+     */
+    // const [showTrackingPopUp, setShowTrackingPopUp] = useState(false);
+
+    // const handleCloseTrackingPopUp = () => setShowTrackingPopUp(false);
+    // const handleShowTrackingPopUp = (orderId) => {
+    //     setCurrentOrderId(orderId);
+    //     setShowTrackingPopUp(true)
+    // };
+    //-----End-----//
+
+    // const memoizedDailyRevenue = useMemo(() => dailyRevenue, [dailyRevenue]);
 
     return (
         <div className="adminpage">
@@ -11,66 +107,68 @@ export default function AdminPage() {
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
             </div>
+            <div className="container">
 
-            <div className="row">
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2">
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Đơn hàng
+                <div className="row">
+                    <div className="col-lg-4 col-md-6 mb-4">
+                        <div className="card border-left-primary shadow h-100 py-2">
+                            <div className="card-body">
+                                <div className="row no-gutters align-items-center">
+                                    <div className="col mr-2">
+                                        <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Đơn hàng
+                                        </div>
+                                        <div className="h5 mb-0 font-weight-bold text-gray-800">
+                                            {'100000'.toLocaleString('vi-VN')}
+                                        </div>
                                     </div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        10
+                                    <div className="col-auto">
+                                        <i className="fas fa-calendar fa-2x text-gray-300"></i>
                                     </div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Tổng doanh thu
+                    <div className="col-lg-4 col-md-6 mb-4">
+                        <div className="card border-left-success shadow h-100 py-2">
+                            <div className="card-body">
+                                <div className="row no-gutters align-items-center">
+                                    <div className="col mr-2">
+                                        <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Tổng doanh thu
+                                        </div>
+                                        <div className="h5 mb-0 font-weight-bold text-gray-800">
+                                            {/* {calculateRevenue()} */}
+                                        </div>
                                     </div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        3.000.000
+                                    <div className="col-auto">
+                                        <i className="fa-solid fa-dong-sign fa-2x text-gray-300"></i>
                                     </div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fa-solid fa-dong-sign fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="col-lg-4 col-md-6 mb-4">
-                    <div className="card border-left-info shadow h-100 py-2">
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                        Sản phẩm
-                                    </div>
-                                    <div className="row no-gutters align-items-center">
-                                        <div className="col-auto">
-                                            <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                2
+                    <div className="col-lg-4 col-md-6 mb-4">
+                        <div className="card border-left-info shadow h-100 py-2">
+                            <div className="card-body">
+                                <div className="row no-gutters align-items-center">
+                                    <div className="col mr-2">
+                                        <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Sản phẩm
+                                        </div>
+                                        <div className="row no-gutters align-items-center">
+                                            <div className="col-auto">
+                                                <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    3
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    <div className="col-auto">
+                                        <i className="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -91,14 +189,12 @@ export default function AdminPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colSpan="5" style={{ backgroundColor: "white", fontWeight: "500" }}>Không có đơn hàng nào cần xác nhận</td>
-                        </tr>
+
                         <tr className="adminpage">
                             <td>Huynh Minh Phuoc</td>
-                            <td>25/09/2024</td>
-                            <td>3.000.000</td>
-                            <td>Đang được xử lý</td>
+                            <td>30/02/2024</td>
+                            <td>300000</td>
+                            <td>Đang xử lý</td>
                             <td>
                                 <div className="action">
                                     <a className="view btn btn-warning btn-sm">
@@ -114,11 +210,11 @@ export default function AdminPage() {
                 </table>
 
                 <div className="pagination">
-
-                    <button className="page-link">
-                        3
-                    </button>
-
+                    {/* {pageNumbers.map(number => (
+                        <button key={number} onClick={() => paginate(number)} className="page-link">
+                            {number}
+                        </button>
+                    ))} */}
                 </div>
 
                 <div className="showAll">
@@ -133,8 +229,6 @@ export default function AdminPage() {
                 <div className="chart">
                     {/* <RevenueChart data={memoizedDailyRevenue} /> */}
                 </div>
-
-
             </div>
         </div>
     );

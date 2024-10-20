@@ -78,8 +78,15 @@ const Cart = () => {
 
 
     // Remove item from cart
-    const handleRemoveItem = (idProduct) => {
-        const updatedCartItems = cartItems.filter(item => item.idProduct !== idProduct);
+    const handleRemoveItem = (idProduct, idCombo) => {
+        const updatedCartItems = cartItems.filter(item => {
+            if (idProduct) {
+                return item.idProduct !== idProduct;
+            } else if (idCombo) {
+                return item.idCombo !== idCombo;
+            }
+            return true;
+        });
         setCartItems(updatedCartItems);
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     }
@@ -149,7 +156,7 @@ const Cart = () => {
 
                                         <td><span style={{ display: 'inline-block', width: '100px' }}>{(item.quantity * item.salePrice).toLocaleString()}đ</span></td>
                                         <td>
-                                            <span onClick={() => handleRemoveItem(item.idProduct)}>Xoá</span>
+                                            <span onClick={() => handleRemoveItem(item.idProduct, item.idCombo)}>Xoá</span>
                                         </td>
                                     </tr>
                                 </tbody>

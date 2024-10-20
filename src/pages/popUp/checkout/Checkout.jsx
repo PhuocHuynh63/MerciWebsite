@@ -303,7 +303,7 @@ const Checkout = (props) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} dialogClassName="modal-80w">
+            <Modal show={show} onHide={handleClose} size='lg'>
                 <Modal.Header>
                     <Modal.Title><img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724918865/Artboard_1_1_eic3yr.svg" /></Modal.Title>
                 </Modal.Header>

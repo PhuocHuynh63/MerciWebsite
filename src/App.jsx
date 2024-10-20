@@ -16,6 +16,13 @@ import Dashboard from './pages/adminPage/dashboard/Dashboard';
 import ComboDetail from './pages/comboDetail/ComboDetail';
 import RegisterPage from './pages/registerPage/RegisterPage';
 import LoginPage from './pages/loginPage/LoginPage/LoginPage'
+import LayoutAdmin from './layouts/LayoutAdmin';
+import AdminUser from './pages/adminPage/adminUser/AdminUser';
+import AdminOrder from './pages/adminPage/adminOrder/AdminOrder';
+import AdminProduct from './pages/adminPage/adminProduct/AdminProduct';
+import AdminProductAdd from './pages/adminPage/adminProduct/addProduct/AddProduct';
+import UpdateProduct from './pages/adminPage/adminProduct/updateProduct/UpdateProduct';
+import ViewProduct from './pages/adminPage/adminProduct/viewProduct/ViewProduct';
 
 
 function App() {
@@ -42,7 +49,13 @@ function App() {
 
 
           {/* Admin */}
-          <Route path='/admin' element={<Layout Component={Dashboard} />} />
+          <Route path='/admin' element={<LayoutAdmin Component={Dashboard} />} />
+          <Route path='/admin/user' element={<LayoutAdmin Component={AdminUser} />} />
+          <Route path='/admin/order' element={<LayoutAdmin Component={AdminOrder} />} />
+          <Route path='/admin/product' element={<LayoutAdmin Component={AdminProduct} />} />
+          <Route path='/admin/product/add' element={<LayoutAdmin Component={AdminProductAdd} />} />
+          <Route path='/admin/product/update/1' element={<LayoutAdmin Component={UpdateProduct} />} />
+          <Route path='/admin/product/detail/1' element={<LayoutAdmin Component={ViewProduct} />} />
           {/* End Admin */}
         </Routes>
       </BrowserRouter>
