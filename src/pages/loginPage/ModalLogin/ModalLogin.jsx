@@ -96,7 +96,7 @@ const ModalLogin = ({ show, handleClose }) => {
                                         <div className="col-12 col-md-6">
                                             <img
                                                 className="img-fluid rounded-start w-100 h-100 object-fit-cover"
-                                                src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1729002218/17f0c773-deea-42ad-9a14-5754cd9b2d97_at5or2.webp" alt="" />
+                                                src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1729438089/unnamed_kg9tml.png" alt="" />
                                         </div>
                                         <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                                             <Button

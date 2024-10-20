@@ -119,6 +119,7 @@ const SignInPage = () => {
                                             className="img-fluid rounded-start w-100 h-100 object-fit-cover"
                                             loading="lazy"
                                             alt="Welcome back you've been missed!"
+                                            src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1729438089/unnamed_kg9tml.png"
                                         />
                                     </div>
                                     <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
