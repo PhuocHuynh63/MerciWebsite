@@ -56,3 +56,26 @@
         }
     }
 }
+
+@media (max-width: 900px) {
+    .sidebar-profile-user {
+        width: 16vw;
+        
+        .profile{
+            img{
+                width: 70%;
+                height: 70%;
+            }
+            .profile-name{
+                font-size: 18px;
+            }
+            .profile-email{
+                font-size: 10px;
+            }
+        }
+        .profile-tag{
+            font-size: 10px;
+            padding: 10px 0 10px 10px;
+        }
+    }
+}

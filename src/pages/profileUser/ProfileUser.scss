@@ -106,3 +106,49 @@
 
     }
 }
+
+@media (max-width: 900px) {
+    .profile-user {
+        margin-left: 20px;
+
+        .title {
+            h4 {
+                font-size: 20px;
+                text-align: center;
+            }
+
+            p {
+                font-size: 15px;
+                text-align: center;
+            }
+        }
+
+        form {
+            margin: 0 auto;
+
+            .form-group {
+                width: 100%;
+
+                .form-input {
+                    label {
+                        width: 100%;
+                        text-align: left;
+                        padding-right: 0;
+                    }
+
+                    input {
+                        width: 100%;
+                    }
+
+                    .error {
+                        left: 0;
+                    }
+                }
+
+                .btn-save {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

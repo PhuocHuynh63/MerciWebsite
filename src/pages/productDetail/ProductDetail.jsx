@@ -33,7 +33,7 @@ const ProductDetail = () => {
 
 
     /**
-     * Modal Feedback
+     * Modal Feedbacks
      */
     const [showModal, setShowModal] = useState(false);
     const handleOpenModal = () => {

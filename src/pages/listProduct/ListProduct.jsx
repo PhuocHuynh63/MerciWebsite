@@ -148,53 +148,45 @@ const ListProduct = () => {
                 </div>
 
                 <div className="list-product_item">
-                    <div className="row d-flex justify-content-center align-items-center">
+                    <div className="row">
                         {currentProducts.length === 0 && <p style={{ textAlign: 'center', color: '#fff', fontWeight: '700', fontSize: '30px' }}>Không có sản phẩm nào</p>}
                         {currentProducts.map((product, index) => (
                             categoryId === 1 ? (
-                                <div className="col-md-4 col-lg-4" key={index}>
-                                    <div className="product">
-                                        <div className="background">
-                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
-                                            <div className="item">
+                                <div className="col-md-4 col-lg-4 custom" key={index}>
+                                    <div className="product d-flex justify-content-center">
+                                        <div className="item">
+                                            <div className="product-info">
                                                 <Link to={`/product/${product.slug}`}>
-                                                    <div className="product-info">
-                                                        <img src={product.image} alt="product" />
-                                                        <p>{product.name}</p>
-                                                        <p>{product?.salePrice?.toLocaleString()}đ</p>
-                                                    </div>
+                                                    <img src={product.image} alt="product" />
+                                                    <p>{product.name}</p>
+                                                    <p>{product?.salePrice?.toLocaleString()}đ</p>
                                                 </Link>
-                                            </div>
-
-                                            <div className="action">
-                                                <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
-                                                <Link to={`/product/${product.slug}`}>
-                                                    <button>Mua ngay</button>
-                                                </Link>
+                                                <div className="action">
+                                                    <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
+                                                    <Link to={`/product/${product.slug}`}>
+                                                        <button>Mua ngay</button>
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             ) : categoryId === 2 ? (
-                                <div className="col-md-4 col-lg-4" key={index}>
-                                    <div className="product">
-                                        <div className="background">
-                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
-                                            <div className="item">
+                                <div className="col-md-4 col-lg-4 custom" key={index}>
+                                    <div className="product d-flex justify-content-center">
+                                        <div className="item">
+                                            <div className="product-info">
                                                 <Link to={`/combo/${product.slug}`}>
-                                                    <div className="product-info">
-                                                        <img src={product.image} alt="product" />
-                                                        <p>{product.name}</p>
-                                                        <p>{product?.salePrice?.toLocaleString()}đ</p>
-                                                    </div>
+                                                    <img src={product.image} alt="product" />
+                                                    <p>{product.name}</p>
+                                                    <p>{product?.salePrice?.toLocaleString()}đ</p>
                                                 </Link>
-                                            </div>
-
-                                            <div className="action">
-                                                <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
-                                                <Link to={`/combo/${product.slug}`}>
-                                                    <button>Mua ngay</button>
-                                                </Link>
+                                                <div className="action">
+                                                    <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
+                                                    <Link to={`/combo/${product.slug}`}>
+                                                        <button>Mua ngay</button>
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -221,7 +213,7 @@ const ListProduct = () => {
                     </ul>
                 </nav>
             </div>
-        </div>
+        </div >
     );
 };
 

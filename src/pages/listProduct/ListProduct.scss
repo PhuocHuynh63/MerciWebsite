@@ -7,12 +7,12 @@
             color: #004AAD;
             font-weight: 600;
             font-size: 20px;
-            font-family: 'montserrat', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: #fdfdfd;
             border: none;
             border-radius: 10px;
             padding: 10px 20px;
-            transition: all 0.3s;
+            transition: background-color 0.3s;
 
             &:hover {
                 background-color: #f6f6f6;
@@ -30,16 +30,14 @@
                     color: #004AAD;
                     font-weight: 600;
                     font-size: 20px;
-                    font-family: 'montserrat', sans-serif;
+                    font-family: 'Montserrat', sans-serif;
                     padding: 10px;
                     text-align: center;
                     display: block;
-                    transition: all 0.3s;
                     background-color: #ffff;
-                    margin-top: 5px;
-                    margin-bottom: 15px;
+                    margin: 5px 0;
                     border-radius: 10px;
-                    width: 100%;
+                    transition: background-color 0.3s;
 
                     &:hover {
                         background-color: #f6f6f6;
@@ -51,76 +49,71 @@
                 display: none;
             }
         }
-
-
     }
 
     .content {
-        .product {
-            margin-bottom: 80px;
-            transition: all 0.3s;
+        .list-product_item {
+            .custom {
+                height: 30%;
 
-            &:hover {
-                transform: scale(1.013);
-            }
+                .product {
+                    margin-bottom: 80px;
+                    transition: transform 0.3s;
+                    background: url('https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg') no-repeat center;
+                    background-size: contain;
+                    height: 80%;
+                    width: 100%;
 
-            .background {
-                position: relative;
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                    &:hover {
+                        transform: scale(1.013);
+                    }
 
-                img {
-                    width: 85%;
-                    border-radius: 10px;
-                    transition: all 0.3s;
-                }
+                    .item {
+                        height: 100%;
+                        width: 100%;
 
-                .item {
+                        .product-info {
+                            width: 100%;
+                            height: 460px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+                            align-items: center;
+                            padding: 10px;
+                            color: #ffffff;
 
-                    .product-info {
-                        position: absolute;
-                        margin-top: 0px;
-                        top: 23px;
-                        left: 440px;
-                        width: 337px;
-                        transform: translateX(-120%);
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-end;
-                        align-items: center;
-                        padding: 10px;
-                        color: #ffffff;
-                        transition: all 0.3s;
+                            a {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                width: 90%;
+                                height: 82%;
+                            }
 
-                        img {
-                            width: 230px;
-                            height: 200px;
-                            margin-bottom: 5px;
-                        }
+                            img {
+                                width: 50%;
+                                height: 60%;
+                                margin-bottom: 5px;
+                            }
 
-                        p {
-                            text-align: center;
-                            color: #004AAD;
-                            font-family: 'Montserrat', sans-serif;
-                            font-weight: 600;
-                            font-size: 19px;
-
-                            &:nth-child(2) {
-                                margin: 10px 0 3px 0;
+                            p {
+                                text-align: center;
+                                color: #004AAD;
+                                font-family: 'Montserrat', sans-serif;
+                                font-weight: 600;
+                                font-size: 19px;
+                                margin: 10px 0;
                             }
                         }
                     }
                 }
 
                 .action {
-                    position: absolute;
-                    bottom: 37px;
-                    left: 62px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    gap: 20px;
                     transition: all 0.3s;
 
                     button {
@@ -131,19 +124,19 @@
                         font-size: 15px;
                         border: none;
                         border-radius: 16px;
-                        transition: all 0.3s;
-                        padding: 15px 14px;
-                        width: auto;
+                        padding: 13px 14px;
                         white-space: nowrap;
-
-                        &:first-child {
-                            margin-right: 15px;
-                        }
+                        transition: background-color 0.3s, color 0.3s;
 
                         &:hover {
                             background-color: #f6f6f6;
                             color: #004AAD;
                         }
+                    }
+
+                    a {
+                        text-align: center;
+                        width: 50%;
                     }
                 }
             }
@@ -155,13 +148,32 @@
         color: #ffffff;
         border: none;
         margin: 0 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}
 
-        &button {
-            cursor: pointer;
-        }
+@media (max-width: 1444px) {
+    .content .list-product_item .custom .product .item .product-info a {
+        width: 40%;
+    }
 
-        &.input {
-            border-radius: 5px;
-        }
+    .content .list-product_item .custom .action {
+        width: 30%;
+        margin-left: 17px;
+    }
+
+    .content .list-product_item .custom .action a button {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .list-product .content .list-product_item .custom .product .item .product-info {
+        height: 274px;
+    }
+
+    .list-product .content .list-product_item .custom .action button {
+        scale: 0.69;
     }
 }
