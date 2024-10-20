@@ -31,7 +31,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='*' element={<Layout Component={NotFound} />} />
+          <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Layout Component={HomePage} />} />
           <Route path='/about-us' element={<Layout Component={AboutUs} />} />
           <Route path='/product/:slug' element={<Layout Component={ProductDetail} />} />
