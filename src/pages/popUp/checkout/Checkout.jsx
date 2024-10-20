@@ -270,7 +270,36 @@ const Checkout = (props) => {
     //----------------End Handle Form----------------//
 
 
+    /**
+      * Fetch user data from API and set it to state
+      */
+    useEffect(() => {
+        const token = localStorage.getItem('USER_INFO');
+        if (token) {
+            setIsLoggedIn(true); // Set user as logged in
+            const decoded = jwtDecode(token);
+            const username = decoded.sub;
 
+            merci.getUserByUserName(username)
+                .then((res) => {
+                    const userData = res.data;
+                    setUser(userData);
+                    setUserId(userData.id); // Set userId
+                    setAddresses(userData.listAddress);
+                    setFormData({
+                        firstName: userData.firstName,
+                        lastName: userData.lastName,
+                        email: userData.email,
+                        phone: userData.phoneNumber,
+                        address: userData.listAddress[0]?.address || '',
+                        note: ''
+                    });
+                })
+                .catch((err) => {
+                    console.log("Error fetching user", err);
+                });
+        }
+    }, []);
 
     return (
         <>

@@ -22,7 +22,7 @@ export const merci = {
     },
 
     getComboDetail: (slug) => {
-        return https.get(`/Combos/slug/${slug}`);
+        return https.get(`/Combos/${slug}`);
     },
 
     postRegister: (data) => {

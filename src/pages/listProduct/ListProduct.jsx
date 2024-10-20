@@ -3,9 +3,11 @@ import './ListProduct.scss';
 import SideBar from './sideBar/SideBar';
 import { useEffect, useState } from 'react';
 import { merci } from '../../service/merciSrc';
+import { notification } from 'antd';
 
 const ListProduct = () => {
     const { id } = useParams();
+    const categoryId = parseInt(id);
 
     /**
      * Handle Dropdown
@@ -39,7 +41,6 @@ const ListProduct = () => {
             });
     }, [id]);
 
-
     /**
      * Lọc sản phẩm theo giá
      */
@@ -60,6 +61,69 @@ const ListProduct = () => {
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+    };
+
+    /**
+    * Handle click on cart icon
+    * @param {*} e 
+    * @param {*} product 
+    * @returns 
+    */
+    const handleAddToCart = (e, product) => {
+        const quantity = 1; // Giả định mỗi lần thêm 1 sản phẩm
+
+        const item = {
+            idProduct: product.idProduct,
+            idCategory: product.idCategory,
+            salePrice: product.salePrice,
+            image: product.image,
+            productName: product.name,
+            quantity,
+            max: product.quantity,
+            price: product.price,
+            totalPrice: quantity * (product.salePrice || product.price),
+        };
+
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const existingItemIndex = cartItems.findIndex(cartItem => cartItem.idProduct === item.idProduct);
+
+        if (existingItemIndex > -1) {
+            const existingItem = cartItems[existingItemIndex];
+            const newQuantity = existingItem.quantity + item.quantity;
+
+            if (newQuantity > item.max) {
+                existingItem.quantity = item.max;
+                existingItem.totalPrice = item.max * (existingItem.salePrice || existingItem.price);
+                notification.error({
+                    message: 'Thông báo',
+                    description: 'Số lượng sản phẩm đã đạt tối đa',
+                    placement: 'topRight'
+                });
+            } else {
+                existingItem.quantity = newQuantity;
+                existingItem.totalPrice = newQuantity * (existingItem.salePrice || existingItem.price);
+                notification.success({
+                    message: 'Thông báo',
+                    description: 'Cập nhật giỏ hàng thành công',
+                    placement: 'topRight'
+                });
+            }
+        } else {
+            if (item.quantity > item.max) {
+                item.quantity = item.max;
+                item.totalPrice = item.max * (item.salePrice || item.price);
+            } else {
+                item.totalPrice = item.quantity * (item.salePrice || item.price);
+                notification.success({
+                    message: 'Thông báo',
+                    description: 'Thêm sản phẩm vào giỏ thành công',
+                    placement: 'topRight'
+                });
+            }
+            cartItems.push(item);
+        }
+
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
     };
 
     return (
@@ -87,24 +151,55 @@ const ListProduct = () => {
                     <div className="row d-flex justify-content-center align-items-center">
                         {currentProducts.length === 0 && <p style={{ textAlign: 'center', color: '#fff', fontWeight: '700', fontSize: '30px' }}>Không có sản phẩm nào</p>}
                         {currentProducts.map((product, index) => (
-                            <div className="col-md-4" key={index}>
-                                <div className="product">
-                                    <div className="background">
-                                        <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
-                                        <Link to={`/product/${product.slug}`}>
-                                            <div className="product-info">
-                                                <img src={product.image} alt="product" />
-                                                <p>{product.name}</p>
-                                                <p>{product?.salePrice?.toLocaleString()}đ</p>
+                            categoryId === 1 ? (
+                                <div className="col-md-4 col-lg-4" key={index}>
+                                    <div className="product">
+                                        <div className="background">
+                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
+                                            <div className="item">
+                                                <Link to={`/product/${product.slug}`}>
+                                                    <div className="product-info">
+                                                        <img src={product.image} alt="product" />
+                                                        <p>{product.name}</p>
+                                                        <p>{product?.salePrice?.toLocaleString()}đ</p>
+                                                    </div>
+                                                </Link>
                                             </div>
-                                        </Link>
-                                        <div className="action">
-                                            <button>Thêm vào giỏ hàng</button>
-                                            <button>Mua ngay</button>
+
+                                            <div className="action">
+                                                <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
+                                                <Link to={`/product/${product.slug}`}>
+                                                    <button>Mua ngay</button>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : categoryId === 2 ? (
+                                <div className="col-md-4 col-lg-4" key={index}>
+                                    <div className="product">
+                                        <div className="background">
+                                            <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725335832/Rectangle_78_opzqmb.svg" alt="" />
+                                            <div className="item">
+                                                <Link to={`/combo/${product.slug}`}>
+                                                    <div className="product-info">
+                                                        <img src={product.image} alt="product" />
+                                                        <p>{product.name}</p>
+                                                        <p>{product?.salePrice?.toLocaleString()}đ</p>
+                                                    </div>
+                                                </Link>
+                                            </div>
+
+                                            <div className="action">
+                                                <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
+                                                <Link to={`/combo/${product.slug}`}>
+                                                    <button>Mua ngay</button>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : null
                         ))}
                     </div>
                 </div>

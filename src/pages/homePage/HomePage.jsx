@@ -57,22 +57,22 @@ const HomePage = () => {
       <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           <div className="carousel-item active c1 " data-bs-interval="4000">
-            <Link to='/product/:slug'>
+            <Link to='/combo/set-qua-tang-thien-lanh'>
               <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211781/TRUE_HARMONY_N%E1%BB%80N_CH%E1%BB%A6_vlvh5z.svg" className="d-block w-100" alt="..." />
             </Link>
           </div>
           <div className="carousel-item c2" data-bs-interval="4000">
-            <Link to='/product/:slug'>
+            <Link to='/combo/set-qua-tang-thuy-hong'>
               <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211855/LOVE_STORY_N%E1%BB%80N_CH%E1%BB%A6_voaibu.svg" className="d-block w-100" alt="..." />
             </Link>
           </div>
           <div className="carousel-item c3" data-bs-interval="4000">
-            <Link to='/product/:slug'>
+            <Link to='/combo/set-qua-tang-muot-ma'>
               <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211779/PURE_JOY_N%E1%BB%80N_CH%E1%BB%A6_eedu4y.svg" className="d-block w-100" alt="..." />
             </Link>
           </div>
           <div className="carousel-item c4" data-bs-interval="4000">
-            <Link to='/product/:slug'>
+            <Link to='/combo/set-qua-tang-ngao-ngat'>
               <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211860/ETERNAL_BOND_N%E1%BB%80N_CH%E1%BB%A6_fenvoz.svg" className="d-block w-100" alt="..." />
             </Link>
           </div>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import './SideBar.scss';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const SideBar = ({ onPriceFilter, minPrice }) => {
 
@@ -67,18 +67,18 @@ const SideBar = ({ onPriceFilter, minPrice }) => {
                         <div className="line"></div>
                     </div>
                     <div className="content">
-                        <div className="product">
+                        <Link className="product" to={'/combo/set-qua-tang-thien-lanh'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_47_ur7mcw.svg" alt="product" />
-                        </div>
-                        <div className="product">
+                        </Link>
+                        <Link className="product" to={'/combo/set-qua-tang-thuy-hong'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_68_p6b67s.svg" alt="product" />
-                        </div>
-                        <div className="product">
+                        </Link>
+                        <Link className="product" to={'/combo/set-qua-tang-muot-ma'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_69_u0ewxp.svg" alt="product" />
-                        </div>
-                        <div className="product">
+                        </Link>
+                        <Link className="product" to={'/combo/set-qua-tang-ngao-ngat'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_70_vt0nye.svg" alt="product" />
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

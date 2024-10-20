@@ -102,7 +102,8 @@ const Cart = () => {
             {cartItems.length === 0 ?
                 <div className="empty-cart">
                     {/* <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724224158/Remove-bg.ai_1720876902030_1_mbi9bc.svg" alt="" /> */}
-                    <p>Giỏ hàng của bạn đang trống</p>
+                    <p>Bạn chưa mua món hàng nào :((</p>
+                    <p>Hãy ghé dạo Merci một tí nhé</p>
                     <Link to='/'>
                         <button>
                             <span>Quay lại trang chủ</span>

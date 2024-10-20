@@ -77,36 +77,39 @@
                     transition: all 0.3s;
                 }
 
-                .product-info {
-                    position: absolute;
-                    margin-top: 0px;
-                    top: 23px;
-                    left: 440px;
-                    width: 337px;
-                    transform: translateX(-120%);
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                    align-items: center;
-                    padding: 10px;
-                    color: #ffffff;
-                    transition: all 0.3s;
+                .item {
 
-                    img {
-                        width: 230px;
-                        height: 200px;
-                        margin-bottom: 5px;
-                    }
+                    .product-info {
+                        position: absolute;
+                        margin-top: 0px;
+                        top: 23px;
+                        left: 440px;
+                        width: 337px;
+                        transform: translateX(-120%);
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: center;
+                        padding: 10px;
+                        color: #ffffff;
+                        transition: all 0.3s;
 
-                    p {
-                        text-align: center;
-                        color: #004AAD;
-                        font-family: 'Montserrat', sans-serif;
-                        font-weight: 600;
-                        font-size: 19px;
+                        img {
+                            width: 230px;
+                            height: 200px;
+                            margin-bottom: 5px;
+                        }
 
-                        &:nth-child(2) {
-                            margin: 10px 0 3px 0;
+                        p {
+                            text-align: center;
+                            color: #004AAD;
+                            font-family: 'Montserrat', sans-serif;
+                            font-weight: 600;
+                            font-size: 19px;
+
+                            &:nth-child(2) {
+                                margin: 10px 0 3px 0;
+                            }
                         }
                     }
                 }
