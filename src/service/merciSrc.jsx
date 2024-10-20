@@ -32,6 +32,10 @@ export const merci = {
     postOrder: (data) => {
         return https.post('/Orders', data);
     },
+
+    getUserById: (id) => {
+        return https.get(`/Users/${id}`);
+    },
 }
 
 

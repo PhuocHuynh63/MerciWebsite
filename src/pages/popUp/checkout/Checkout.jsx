@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addressVietNam, merci } from "../../../service/merciSrc";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const Checkout = (props) => {
     const { show, handleClose, cartItems, totalAmount } = props;
@@ -238,12 +239,20 @@ const Checkout = (props) => {
 
         if (validate()) {
             const checkoutData = {
+                // guest: !isLoggedIn ? {
+                //     name: formData.name,
+                //     username: null,
+                //     email: formData.email,
+                //     phone: formData.phone,
+                //     shippingAddress: shippingAddress,
+                // } : null,
+                // idUser: isLoggedIn ? userId : null,
                 name: formData.name,
                 email: formData.email,
                 phone: formData.phone,
                 shippingAddress: shippingAddress,
                 totalAmount: totalAmount,
-                orderType: formData.paymentMethod,
+                orderType: paymentMethod,
                 item: cartItems.map(item => ({
                     idProduct: item.idProduct,
                     quantity: item.quantity,
@@ -251,6 +260,9 @@ const Checkout = (props) => {
                 note: formData.note,
                 // totalAmount: 0,
             }
+
+            console.log(checkoutData);
+
 
             merci.postOrder(checkoutData)
                 .then((res) => {
@@ -273,26 +285,28 @@ const Checkout = (props) => {
     /**
       * Fetch user data from API and set it to state
       */
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState({});
+    const [userId, setUserId] = useState(null);
+
     useEffect(() => {
         const token = localStorage.getItem('USER_INFO');
         if (token) {
             setIsLoggedIn(true); // Set user as logged in
             const decoded = jwtDecode(token);
-            const username = decoded.sub;
+            console.log(decoded);
 
-            merci.getUserByUserName(username)
+            const id = decoded.id;
+
+            merci.getUserById(id)
                 .then((res) => {
                     const userData = res.data;
                     setUser(userData);
-                    setUserId(userData.id); // Set userId
-                    setAddresses(userData.listAddress);
+                    setUserId(userData.id);
                     setFormData({
-                        firstName: userData.firstName,
-                        lastName: userData.lastName,
+                        name: userData.name,
                         email: userData.email,
-                        phone: userData.phoneNumber,
-                        address: userData.listAddress[0]?.address || '',
-                        note: ''
+                        phone: userData.phone
                     });
                 })
                 .catch((err) => {
