@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import { userService } from "../../../service/userService";
-import { Modal, Button } from "react-bootstrap";
+import { Modal,Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ModalLogin.scss";
 import { useNavigate } from "react-router-dom";
 import { localService } from "../../../service/localService";
 import { setLoginAction } from "../../../redux/action/UserAction";
-import { Input, Form, notification } from "antd";
+import { Input,Form,notification } from "antd";
 import { useDispatch } from "react-redux";
 
-const ModalLogin = ({ show, handleClose }) => {
-    const [loading, setLoading] = useState(false);
-    const [password, setPassword] = useState("");
-    const [showError, setShowError] = useState(false);
+const ModalLogin = ({ show,handleClose }) => {
+    const [loading,setLoading] = useState(false);
+    const [password,setPassword] = useState("");
+    const [showError,setShowError] = useState(false);
     let dispatch = useDispatch();
     let navigate = useNavigate();
 
@@ -24,16 +24,16 @@ const ModalLogin = ({ show, handleClose }) => {
 
     const onFinish = (values) => {
         setLoading(true); // Bắt đầu tải
-        console.log("Success:", values);
+        console.log("Success:",values);
         userService
             .postLogin(values)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log("API thành công:", response.data);
+                    console.log("API thành công:",response.data);
 
                     localService.set(response.data.accessToken); // Lưu token vào local storage
                     dispatch(
-                        setLoginAction({ token: response.data, role: response.role })
+                        setLoginAction({ token: response.data,role: response.role })
                     ); // Lưu token và vai trò vào redux
 
                     notification.success({
@@ -49,13 +49,13 @@ const ModalLogin = ({ show, handleClose }) => {
 
                     setTimeout(() => {
                         window.location.reload();
-                    }, 1000); // Reload the page after 1 second
+                    },1000); // Reload the page after 1 second
                 } else {
                     throw new Error(response.description);
                 }
             })
             .catch((error) => {
-                console.log("API lỗi:", error);
+                console.log("API lỗi:",error);
                 notification.error({
                     message: "Đăng nhập thất bại",
                     description: error.message,
@@ -67,7 +67,7 @@ const ModalLogin = ({ show, handleClose }) => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log(`Failed:`, errorInfo);
+        console.log(`Failed:`,errorInfo);
         notification.error({
             message: "Đăng nhập thất bại",
             description: "Kiểm tra lại tên đăng nhập và mật khẩu",
@@ -149,7 +149,7 @@ const ModalLogin = ({ show, handleClose }) => {
                                                                         htmlFor="username"
                                                                         className="form-label"
                                                                     >
-                                                                        Email
+                                                                        Username
                                                                     </label>
                                                                 </div>
                                                             </div>

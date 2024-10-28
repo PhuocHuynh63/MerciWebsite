@@ -1,7 +1,7 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import './ListProduct.scss';
 import SideBar from './sideBar/SideBar';
-import { useEffect, useState } from 'react';
+import { useEffect,useState } from 'react';
 import { merci } from '../../service/merciSrc';
 import { notification } from 'antd';
 
@@ -12,22 +12,24 @@ const ListProduct = () => {
     /**
      * Handle Dropdown
      */
-    const [activeDropdown, setActiveDropdown] = useState('Mới nhất');
+    const [activeDropdown,setActiveDropdown] = useState('Mới nhất');
 
     /**
      * Get list product by category
      */
-    const [products, setProducts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [products,setProducts] = useState([]);
+    const [currentPage,setCurrentPage] = useState(1);
     const productsPerPage = 9;
 
     // Filtered by price range
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [minPrice, setMinPrice] = useState(10000); // Giá mặc định ban đầu là tối đa
+    const [filteredProducts,setFilteredProducts] = useState([]);
+    const [minPrice,setMinPrice] = useState(10000); // Giá mặc định ban đầu là tối đa
 
     useEffect(() => {
         merci.getProductsByCategory(id)
             .then(res => {
+                console.log(res.data);
+
                 if (id == 1) {
                     setProducts(res.data.data.products);
                     setFilteredProducts(res.data.data.products);
@@ -39,7 +41,7 @@ const ListProduct = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [id]);
+    },[id]);
 
     /**
      * Lọc sản phẩm theo giá
@@ -55,7 +57,7 @@ const ListProduct = () => {
      */
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = filteredProducts.slice(indexOfFirstProduct,indexOfLastProduct);
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
@@ -69,7 +71,7 @@ const ListProduct = () => {
     * @param {*} product 
     * @returns 
     */
-    const handleAddToCart = (e, product) => {
+    const handleAddToCart = (e,product) => {
         const quantity = 1;
 
         const item = {
@@ -123,7 +125,7 @@ const ListProduct = () => {
             cartItems.push(item);
         }
 
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cartItems',JSON.stringify(cartItems));
     };
 
 
@@ -133,7 +135,7 @@ const ListProduct = () => {
     * @param {*} product 
     * @returns 
     */
-    const handleAddToCartCombo = (e, product) => {
+    const handleAddToCartCombo = (e,product) => {
         const quantity = 1;
 
         const item = {
@@ -189,7 +191,7 @@ const ListProduct = () => {
             cartItems.push(item);
         }
 
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cartItems',JSON.stringify(cartItems));
     };
 
     //------End------//
@@ -218,8 +220,8 @@ const ListProduct = () => {
 
                 <div className="list-product_item">
                     <div className="row">
-                        {currentProducts.length === 0 && <p style={{ textAlign: 'center', color: '#fff', fontWeight: '700', fontSize: '30px' }}>Không có sản phẩm nào</p>}
-                        {currentProducts.map((product, index) => (
+                        {currentProducts.length === 0 && <p style={{ textAlign: 'center',color: '#fff',fontWeight: '700',fontSize: '30px' }}>Không có sản phẩm nào</p>}
+                        {currentProducts.map((product,index) => (
                             categoryId === 1 ? (
                                 <div className="col-md-4 col-lg-4 custom" key={index}>
                                     <div className="product d-flex justify-content-center">
@@ -231,7 +233,7 @@ const ListProduct = () => {
                                                     <p>{product?.salePrice?.toLocaleString()}đ</p>
                                                 </Link>
                                                 <div className="action">
-                                                    <button onClick={(e) => handleAddToCart(e, product)}>Thêm vào giỏ hàng</button>
+                                                    <button onClick={(e) => handleAddToCart(e,product)}>Thêm vào giỏ hàng</button>
                                                     <Link to={`/product/${product.slug}`}>
                                                         <button>Mua ngay</button>
                                                     </Link>
@@ -251,7 +253,7 @@ const ListProduct = () => {
                                                     <p>{product?.salePrice?.toLocaleString()}đ</p>
                                                 </Link>
                                                 <div className="action">
-                                                    <button onClick={(e) => handleAddToCartCombo(e, product)}>Thêm vào giỏ hàng</button>
+                                                    <button onClick={(e) => handleAddToCartCombo(e,product)}>Thêm vào giỏ hàng</button>
                                                     <Link to={`/combo/${product.slug}`}>
                                                         <button>Mua ngay</button>
                                                     </Link>
@@ -271,7 +273,7 @@ const ListProduct = () => {
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                             <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>{'<'}</button>
                         </li>
-                        {[...Array(totalPages)].map((_, index) => (
+                        {[...Array(totalPages)].map((_,index) => (
                             <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
                                 <button className="page-link" onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
                             </li>

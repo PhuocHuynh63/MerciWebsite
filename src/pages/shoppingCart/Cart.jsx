@@ -132,9 +132,9 @@ const Cart = () => {
                             </thead>
                             {cartItems.map((item, index) => (
 
-                                <tbody>
+                                <tbody key={index}>
                                     <tr>
-                                        <td>
+                                        <td key={index}>
                                             <img src={item.image} alt="" />
                                             <div className="background">
                                                 <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724834860/%C3%B4_2_iw8uvm.svg" alt="product" />

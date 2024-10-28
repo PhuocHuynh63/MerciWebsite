@@ -1,7 +1,8 @@
 import axios from "axios";
 import { localService } from "./localService";
 
-export const BASE_URL = "https://merci.azurewebsites.net/api/";
+// export const BASE_URL = "http://localhost:5209/api/";
+export const BASE_URL = "https://merci.azurewebsites.net/api";
 
 
 const TokenApp = "";
