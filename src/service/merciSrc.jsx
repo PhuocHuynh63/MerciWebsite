@@ -17,25 +17,29 @@ export const merci = {
         return https.get(`/Categories/${categoryId}`);
     },
 
-    getCombo: () => {
-        return https.get('/Combos');
-    },
-
-    getComboDetail: (slug) => {
-        return https.get(`/Combos/${slug}`);
-    },
-
     postRegister: (data) => {
-        return https.post('/Auth/Register', data);
+        return https.post('/Auth/Register',data);
     },
 
     postOrder: (data) => {
-        return https.post('/Orders', data);
+        return https.post('/Orders',data);
     },
 
     getUserById: (id) => {
         return https.get(`/Users/${id}`);
     },
+
+    getOrder: () => {
+        return https.get('/Orders');
+    },
+
+    getOrderById: (id) => {
+        return https.get(`/Orders/${id}`);
+    },
+
+    putStatusOrder: (data) => {
+        return https.put('/Orders/updateStatus',data);
+    }
 }
 
 

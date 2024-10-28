@@ -67,16 +67,16 @@ const SideBar = ({ onPriceFilter, minPrice }) => {
                         <div className="line"></div>
                     </div>
                     <div className="content">
-                        <Link className="product" to={'/combo/set-qua-tang-thien-lanh'}>
+                        <Link className="product" to={'/product/set-qua-tang-thien-lanh'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_47_ur7mcw.svg" alt="product" />
                         </Link>
-                        <Link className="product" to={'/combo/set-qua-tang-thuy-hong'}>
+                        <Link className="product" to={'/product/set-qua-tang-thuy-hong'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_68_p6b67s.svg" alt="product" />
                         </Link>
-                        <Link className="product" to={'/combo/set-qua-tang-muot-ma'}>
+                        <Link className="product" to={'/product/set-qua-tang-muot-ma'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_69_u0ewxp.svg" alt="product" />
                         </Link>
-                        <Link className="product" to={'/combo/set-qua-tang-ngao-ngat'}>
+                        <Link className="product" to={'/product/set-qua-tang-ngao-ngat'}>
                             <img src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1725281732/Group_70_vt0nye.svg" alt="product" />
                         </Link>
                     </div>

@@ -1,31 +1,41 @@
+import { merci } from "../../../service/merciSrc";
 import "./Dashboard.scss";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect,useState,useMemo } from "react"
+import RevenueChart from "../../../components/chart/chart";
 
 export default function Dashboard() {
-    const [showModal, setShowModal] = useState(false);
+    const [showModal,setShowModal] = useState(false);
 
 
     /**
      * Get order status API
      */
-    // const handleStatusOrder = (orderId) => {
-    //     const payload = { orderId, status: "Đang được xử lý" };
+    const [order,setOrder] = useState([]);
+    useEffect(() => {
+        merci.getOrder()
+            .then((res) => {
+                setOrder(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },[]);
+    //-----End-----//
 
-    //     meBeSrc.putStatusOrder(payload)
-    //         .then((res) => {
-    //             setOrder(prevOrders => prevOrders.map(order =>
-    //                 order.orderId === orderId ? { ...order, status: "Đang được xử lý" } : order
-    //             ));
-    //             setShowModal(true);
-    //             setTimeout(() => {
-    //                 setShowModal(false);
-    //             }, 2000);
-    //             console.log("Order status updated from AdminPage", res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log("Error updating order status from AdminPage", err);
-    //         });
-    // }
+
+    /**
+     * Get product API
+     */
+    const [product,setProduct] = useState([]);
+    useEffect(() => {
+        merci.getProducts()
+            .then((res) => {
+                setProduct(res.data.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },[]);
     //-----End-----//
 
 
@@ -33,34 +43,34 @@ export default function Dashboard() {
      * revenue calculation
      * @returns revenue
      */
-    // const [dailyRevenue, setDailyRevenue] = useState([]);
+    const [dailyRevenue,setDailyRevenue] = useState([]);
 
-    // const calculateRevenue = () => {
-    //     let completedOrders = order.filter((item) => item.status === "Đã giao");
-    //     let revenue = completedOrders.reduce((total, item) => total + item.totalAmount, 0);
-    //     return revenue.toLocaleString('vi-VN');
-    // }
+    const calculateRevenue = () => {
+        let completedOrders = order.filter((item) => item.paymentStatus === "Đã thanh toán");
+        let revenue = completedOrders.reduce((total,item) => total + item.totalAmount,0);
+        return revenue.toLocaleString('vi-VN');
+    }
 
-    // const calculateDailyRevenue = (orderData) => {
-    //     let completedOrders = orderData.filter((item) => item.status === "Đã giao");
+    const calculateDailyRevenue = () => {
+        let completedOrders = order.filter((item) => item.paymentStatus === "Đã thanh toán");
 
-    //     let dailyRevenueData = completedOrders.reduce((acc, item) => {
-    //         let date = new Date(item.updatedAt); // Use updatedAt for the delivery date
-    //         let formattedDate = date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    //         if (!acc[formattedDate]) {
-    //             acc[formattedDate] = 0;
-    //         }
-    //         acc[formattedDate] += item.totalAmount;
-    //         return acc;
-    //     }, {});
+        let dailyRevenueData = completedOrders.reduce((acc,item) => {
+            let date = new Date(item.updatedAt); // Use updatedAt for the delivery date
+            let formattedDate = date.toLocaleDateString('vi-VN',{ day: '2-digit',month: '2-digit',year: 'numeric' });
+            if (!acc[formattedDate]) {
+                acc[formattedDate] = 0;
+            }
+            acc[formattedDate] += item.totalAmount;
+            return acc;
+        },{});
 
-    //     let formattedDailyRevenueData = Object.keys(dailyRevenueData).map(date => ({
-    //         date,
-    //         revenue: dailyRevenueData[date]
-    //     }));
+        let formattedDailyRevenueData = Object.keys(dailyRevenueData).map(date => ({
+            date,
+            revenue: dailyRevenueData[date]
+        }));
 
-    //     setDailyRevenue(formattedDailyRevenueData);
-    // }
+        setDailyRevenue(formattedDailyRevenueData);
+    }
     //-----End-----//
 
     /**
@@ -99,8 +109,15 @@ export default function Dashboard() {
     // };
     //-----End-----//
 
-    // const memoizedDailyRevenue = useMemo(() => dailyRevenue, [dailyRevenue]);
+    useEffect(() => {
+        if (order.length > 0) {
+            calculateDailyRevenue();
+        }
+    },[order]);
 
+    const memoizedDailyRevenue = useMemo(() => dailyRevenue,[dailyRevenue]);
+
+    console.log(memoizedDailyRevenue);
     return (
         <div className="adminpage">
 
@@ -119,7 +136,7 @@ export default function Dashboard() {
                                             Đơn hàng
                                         </div>
                                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                            {'100000'.toLocaleString('vi-VN')}
+                                            {order.length}
                                         </div>
                                     </div>
                                     <div className="col-auto">
@@ -139,7 +156,7 @@ export default function Dashboard() {
                                             Tổng doanh thu
                                         </div>
                                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                            {/* {calculateRevenue()} */}
+                                            {calculateRevenue()}
                                         </div>
                                     </div>
                                     <div className="col-auto">
@@ -161,7 +178,7 @@ export default function Dashboard() {
                                         <div className="row no-gutters align-items-center">
                                             <div className="col-auto">
                                                 <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                    3
+                                                    {product.length}
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +244,7 @@ export default function Dashboard() {
             </div>
             <div className="box-detail">
                 <div className="chart">
-                    {/* <RevenueChart data={memoizedDailyRevenue} /> */}
+                    <RevenueChart data={memoizedDailyRevenue} />
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import "./HeaderAdmin.scss";
 
-import React, { useEffect, useState } from "react";
+import React,{ useEffect,useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { localService } from "../../service/localService";
@@ -11,7 +11,7 @@ export default function HeaderAdmin() {
     /**
        * Take user info (username) from local storage by token
        */
-    const [user, setUser] = useState(null);
+    const [user,setUser] = useState(null);
 
     // useEffect(() => {
     //     const token = localStorage.getItem('USER_INFO');
@@ -72,7 +72,7 @@ export default function HeaderAdmin() {
                                 <i className="fa-solid fa-house fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Quay về trang chủ
                             </a>
-                            <div class="dropdown-divider"></div>
+                            <div className="dropdown-divider"></div>
                             <Link className="dropdown-item" data-toggle="modal" data-target="#logoutModal" onClick={handleLogout}>
                                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Đăng xuất

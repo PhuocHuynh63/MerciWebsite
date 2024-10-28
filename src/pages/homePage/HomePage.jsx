@@ -1,36 +1,36 @@
 import { Link } from "react-router-dom";
 import "./HomePage.scss";
-import { useEffect, useState } from "react";
+import { useEffect,useState } from "react";
 import { merci } from "../../service/merciSrc";
 
 const HomePage = () => {
   /**
    * Call API products
    */
-  const [products, setProducts] = useState([]);
+  const [products,setProducts] = useState([]);
+  const [combo,setCombo] = useState([]);
 
   useEffect(() => {
     merci.getProducts().then((res) => {
-      setProducts(res.data.data);
+      const products = res.data.data;
+      const filterProduct = products.filter((product) => {
+        if (product.idCategory === 1)
+          setProducts((prev) => [...prev,product]);
+      });
+
+      const filterCombo = products.filter((product) => {
+        if (product.idCategory === 2)
+          setCombo((prev) => [...prev,product]);
+      });
     });
-  }, []);
+  },[]);
   //-------------------End call API products-------------------//
 
-  /**
-   * Call API combo
-   */
-  const [combo, setCombo] = useState([]);
-  useEffect(() => {
-    merci.getCombo().then((res) => {
-      setCombo(res.data.data);
-    });
-  }, []);
-  //-------------------End call API combo-------------------//
 
   /**
    * Filter product to show on homepage (8 products)
    */
-  const filterProduct = products.filter((product, index) => {
+  const filterProduct = products.filter((product,index) => {
     return index < 8;
   });
   //-------------------End filter product-------------------//
@@ -39,7 +39,7 @@ const HomePage = () => {
    * Filter new product to show on homepage (3 products)
    */
   const revered = products.reverse();
-  const filterNewdProduct = revered.filter((product, index) => {
+  const filterNewdProduct = revered.filter((product,index) => {
     if (product.createdAt) return index < 3;
   });
   //-------------------End filter new product-------------------//
@@ -54,7 +54,7 @@ const HomePage = () => {
       >
         <div className="carousel-inner">
           <div className="carousel-item active c1 " data-bs-interval="4000">
-            <Link to="/combo/set-qua-tang-thien-lanh">
+            <Link to="/product/set-qua-tang-thien-lanh">
               <img
                 src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211781/TRUE_HARMONY_N%E1%BB%80N_CH%E1%BB%A6_vlvh5z.svg"
                 className="d-block w-100"
@@ -63,7 +63,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="carousel-item c2" data-bs-interval="4000">
-            <Link to="/combo/set-qua-tang-thuy-hong">
+            <Link to="/product/set-qua-tang-thuy-hong">
               <img
                 src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211855/LOVE_STORY_N%E1%BB%80N_CH%E1%BB%A6_voaibu.svg"
                 className="d-block w-100"
@@ -72,7 +72,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="carousel-item c3" data-bs-interval="4000">
-            <Link to="/combo/set-qua-tang-muot-ma">
+            <Link to="/product/set-qua-tang-muot-ma">
               <img
                 src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211779/PURE_JOY_N%E1%BB%80N_CH%E1%BB%A6_eedu4y.svg"
                 className="d-block w-100"
@@ -81,7 +81,7 @@ const HomePage = () => {
             </Link>
           </div>
           <div className="carousel-item c4" data-bs-interval="4000">
-            <Link to="/combo/set-qua-tang-ngao-ngat">
+            <Link to="/product/set-qua-tang-ngao-ngat">
               <img
                 src="https://res.cloudinary.com/dwyzqcunj/image/upload/v1724211860/ETERNAL_BOND_N%E1%BB%80N_CH%E1%BB%A6_fenvoz.svg"
                 className="d-block w-100"
@@ -123,7 +123,7 @@ const HomePage = () => {
 
         <div className="container product d-flex justify-content-center">
           <div className="row d-flex justify-content-center">
-            {filterProduct.map((product, index) => {
+            {filterProduct.map((product,index) => {
               return (
                 <div
                   key={index}
@@ -152,7 +152,7 @@ const HomePage = () => {
 
         <div className="container product">
           <div className="row d-flex justify-content-center">
-            {filterNewdProduct.map((product, index) => {
+            {filterNewdProduct.map((product,index) => {
               return (
                 <div key={index} className="product-item col-4">
                   <Link to={`/product/${product.slug}`}>
@@ -190,10 +190,10 @@ const HomePage = () => {
         </div>
         <div className="container product">
           <div className="position row">
-            {combo.map((product, index) => {
+            {combo.map((product,index) => {
               return (
                 <div key={index} className="item">
-                  <Link to={`/combo/${product.slug}`} style={{ zIndex: "1" }}>
+                  <Link to={`/product/${product.slug}`} style={{ zIndex: "1" }}>
                     <div className="product-item col-md-3">
                       <img src={product.image} />
                     </div>

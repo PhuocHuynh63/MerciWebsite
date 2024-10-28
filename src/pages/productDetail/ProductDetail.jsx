@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect,useState } from 'react';
 import './ProductDetail.scss';
 import DashboardStar from '../../components/dashboardStar/DashboardStar';
 import CommentModal from './commentModal/CommentModal';
@@ -13,29 +13,20 @@ const ProductDetail = () => {
     /**
      * Call API product detail
      */
-    const [productDetail, setProductDetail] = useState({});
+    const [productDetail,setProductDetail] = useState({});
     useEffect(() => {
         merci.getProductDetail(slug)
             .then((res) => {
                 setProductDetail(res.data.data);
             });
-    }, [slug]);
+    },[slug]);
     //-------------------End call API product detail-------------------//
-
-
-    const [comboDetail, setComboDetail] = useState({});
-    useEffect(() => {
-        merci.getComboDetail(slug)
-            .then((res) => {
-                setComboDetail(res.data.data);
-            });
-    }, [slug]);
 
 
     /**
      * Modal Feedbacks
      */
-    const [showModal, setShowModal] = useState(false);
+    const [showModal,setShowModal] = useState(false);
     const handleOpenModal = () => {
         setShowModal(true);
     }
@@ -45,7 +36,7 @@ const ProductDetail = () => {
     /**
      * Form Submit Feedback Handler
      */
-    const [formFeedback, setFormFeedback] = useState({
+    const [formFeedback,setFormFeedback] = useState({
         name: '',
         email: '',
         phone: '',
@@ -54,7 +45,7 @@ const ProductDetail = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name,value } = e.target;
         setFormFeedback({
             ...formFeedback,
             [name]: value
@@ -72,7 +63,7 @@ const ProductDetail = () => {
      * Handle input quantity
      * Chưa xử lý trường hợp nhập quá số lượng có trong kho (Đợi back-end)
      */
-    const [quantity, setQuantity] = useState(1);
+    const [quantity,setQuantity] = useState(1);
     const handleQuantityChange = (e) => {
         const value = parseInt(e.target.value);
         if (isNaN(value) || value < 0) {
@@ -119,21 +110,21 @@ const ProductDetail = () => {
      * Scroll to top when component is mounted
      */
     useEffect(() => {
-        window.scrollTo(0, 300);
-    }, []);
+        window.scrollTo(0,300);
+    },[]);
     //----------------End scroll to top------------------//
 
 
     /**
      * Handle rating, review
      */
-    const [starRating, setStarRating] = useState(0);
+    const [starRating,setStarRating] = useState(0);
     const handleStarRating = (rating) => {
         setStarRating(rating);
-        setFormFeedback(prev => ({ ...prev, starRating: rating }));
+        setFormFeedback(prev => ({ ...prev,starRating: rating }));
     }
 
-    const handleViewStarRating = (starIndex, rating) => {
+    const handleViewStarRating = (starIndex,rating) => {
         if (starIndex <= rating - 1) {
             return 'fa-solid fa-star';
         } else if (starIndex < rating && rating % 1 !== 0) {
@@ -237,7 +228,7 @@ const ProductDetail = () => {
             cartItems.push(item);
         }
 
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        localStorage.setItem('cartItems',JSON.stringify(cartItems));
     };
 
     //------End------//
@@ -297,7 +288,7 @@ const ProductDetail = () => {
 
                 <div className="feedback">
                     <div className="star">
-                        {[1, 2, 3, 4, 5].map(star => (
+                        {[1,2,3,4,5].map(star => (
                             <i
                                 key={star}
                                 id={`star-${star}`}

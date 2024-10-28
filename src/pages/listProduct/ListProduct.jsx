@@ -35,7 +35,7 @@ const ListProduct = () => {
                     setFilteredProducts(res.data.data.products);
                 } else if (id == 2) {
                     setProducts(res.data.data.combos);
-                    setFilteredProducts(res.data.data.combos);
+                    setFilteredProducts(res.data.data.products);
                 }
             })
             .catch(err => {
@@ -128,75 +128,6 @@ const ListProduct = () => {
         localStorage.setItem('cartItems',JSON.stringify(cartItems));
     };
 
-
-    /**
-    * Handle click on cart icon
-    * @param {*} e 
-    * @param {*} product 
-    * @returns 
-    */
-    const handleAddToCartCombo = (e,product) => {
-        const quantity = 1;
-
-        const item = {
-            idCombo: product.idCombo,
-            idCategory: product.idCategory,
-            salePrice: product.salePrice,
-            image: product.image,
-            productName: product.name,
-            quantity,
-            max: product.quantity,
-            price: product.price,
-            totalPrice: quantity * (product.salePrice || product.price),
-        };
-
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const existingItemIndex = cartItems.findIndex(cartItem => cartItem.idCombo === item.idCombo);
-
-        if (existingItemIndex > -1) {
-            const existingItem = cartItems[existingItemIndex];
-            const newQuantity = existingItem.quantity + item.quantity;
-
-            if (newQuantity > item.max) {
-                existingItem.quantity = item.max;
-                existingItem.totalPrice = item.max * (existingItem.salePrice || existingItem.price);
-                notification.error({
-                    message: 'Thông báo',
-                    description: 'Số lượng sản phẩm đã đạt tối đa',
-                    placement: 'topRight'
-                });
-
-            } else {
-                existingItem.quantity = newQuantity;
-                existingItem.totalPrice = newQuantity * (existingItem.salePrice || existingItem.price);
-                notification.success({
-                    message: 'Thông báo',
-                    description: 'Cập nhật giỏ hàng thành công',
-                    placement: 'topRight'
-                });
-            }
-        } else {
-            if (item.quantity > item.max) {
-                item.quantity = item.max;
-                item.totalPrice = item.max * (item.salePrice || item.price);
-
-            } else {
-                item.totalPrice = item.quantity * (item.salePrice || item.price);
-                notification.success({
-                    message: 'Thông báo',
-                    description: 'Thêm sản phẩm vào giỏ thành công',
-                    placement: 'topRight'
-                });
-            }
-            cartItems.push(item);
-        }
-
-        localStorage.setItem('cartItems',JSON.stringify(cartItems));
-    };
-
-    //------End------//
-
-
     return (
         <div className='list-product'>
             <SideBar onPriceFilter={filterByPrice} minPrice={minPrice} />
@@ -247,14 +178,14 @@ const ListProduct = () => {
                                     <div className="product d-flex justify-content-center">
                                         <div className="item">
                                             <div className="product-info">
-                                                <Link to={`/combo/${product.slug}`}>
+                                                <Link to={`/product/${product.slug}`}>
                                                     <img src={product.image} alt="product" />
                                                     <p>{product.name}</p>
                                                     <p>{product?.salePrice?.toLocaleString()}đ</p>
                                                 </Link>
                                                 <div className="action">
-                                                    <button onClick={(e) => handleAddToCartCombo(e,product)}>Thêm vào giỏ hàng</button>
-                                                    <Link to={`/combo/${product.slug}`}>
+                                                    <button onClick={(e) => handleAddToCart(e,product)}>Thêm vào giỏ hàng</button>
+                                                    <Link to={`/product/${product.slug}`}>
                                                         <button>Mua ngay</button>
                                                     </Link>
                                                 </div>
