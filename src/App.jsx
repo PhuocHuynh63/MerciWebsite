@@ -22,6 +22,7 @@ import AdminProduct from './pages/adminPage/adminProduct/AdminProduct';
 import AdminProductAdd from './pages/adminPage/adminProduct/addProduct/AddProduct';
 import UpdateProduct from './pages/adminPage/adminProduct/updateProduct/UpdateProduct';
 import ViewProduct from './pages/adminPage/adminProduct/viewProduct/ViewProduct';
+import ThankyouPage from './pages/thankyouPage/thankyou';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path='/list-product/:id' element={<Layout Component={ListProduct} />} />
           <Route path='/signup' element={<Layout Component={RegisterPage} />} />
           <Route path='/signin' element={<Layout Component={LoginPage} />} />
+          <Route path='/thankyou' element={<ThankyouPage/>} />
 
           {/* Profile */}
           <Route path='/profile' element={<LayoutProfileUser Component={ProfileUser} />} />
