@@ -1,16 +1,16 @@
 import { merci } from "../../../service/merciSrc";
 import "./Dashboard.scss";
-import { useEffect,useState,useMemo } from "react"
+import { useEffect, useState, useMemo } from "react"
 import RevenueChart from "../../../components/chart/chart";
 
 export default function Dashboard() {
-    const [showModal,setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
 
     /**
      * Get order status API
      */
-    const [order,setOrder] = useState([]);
+    const [order, setOrder] = useState([]);
     useEffect(() => {
         merci.getOrder()
             .then((res) => {
@@ -19,14 +19,14 @@ export default function Dashboard() {
             .catch((err) => {
                 console.log(err);
             });
-    },[]);
+    }, []);
     //-----End-----//
 
 
     /**
      * Get product API
      */
-    const [product,setProduct] = useState([]);
+    const [product, setProduct] = useState([]);
     useEffect(() => {
         merci.getProducts()
             .then((res) => {
@@ -35,7 +35,7 @@ export default function Dashboard() {
             .catch((err) => {
                 console.log(err);
             });
-    },[]);
+    }, []);
     //-----End-----//
 
 
@@ -43,26 +43,26 @@ export default function Dashboard() {
      * revenue calculation
      * @returns revenue
      */
-    const [dailyRevenue,setDailyRevenue] = useState([]);
+    const [dailyRevenue, setDailyRevenue] = useState([]);
 
     const calculateRevenue = () => {
         let completedOrders = order.filter((item) => item.paymentStatus === "Đã thanh toán");
-        let revenue = completedOrders.reduce((total,item) => total + item.totalAmount,0);
+        let revenue = completedOrders.reduce((total, item) => total + item.totalAmount, 0);
         return revenue.toLocaleString('vi-VN');
     }
 
     const calculateDailyRevenue = () => {
         let completedOrders = order.filter((item) => item.paymentStatus === "Đã thanh toán");
 
-        let dailyRevenueData = completedOrders.reduce((acc,item) => {
+        let dailyRevenueData = completedOrders.reduce((acc, item) => {
             let date = new Date(item.updatedAt); // Use updatedAt for the delivery date
-            let formattedDate = date.toLocaleDateString('vi-VN',{ day: '2-digit',month: '2-digit',year: 'numeric' });
+            let formattedDate = date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
             if (!acc[formattedDate]) {
                 acc[formattedDate] = 0;
             }
             acc[formattedDate] += item.totalAmount;
             return acc;
-        },{});
+        }, {});
 
         let formattedDailyRevenueData = Object.keys(dailyRevenueData).map(date => ({
             date,
@@ -113,9 +113,9 @@ export default function Dashboard() {
         if (order.length > 0) {
             calculateDailyRevenue();
         }
-    },[order]);
+    }, [order]);
 
-    const memoizedDailyRevenue = useMemo(() => dailyRevenue,[dailyRevenue]);
+    const memoizedDailyRevenue = useMemo(() => dailyRevenue, [dailyRevenue]);
 
     console.log(memoizedDailyRevenue);
     return (

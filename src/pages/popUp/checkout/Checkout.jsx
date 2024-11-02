@@ -1,26 +1,26 @@
 import { Modal } from "react-bootstrap"
 import './Checkout.scss';
-import { Link,useNavigate } from "react-router-dom";
-import { useEffect,useState } from "react";
-import { addressVietNam,merci } from "../../../service/merciSrc";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { addressVietNam, merci } from "../../../service/merciSrc";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 
 const Checkout = (props) => {
-    const { show,handleClose,cartItems,totalAmount } = props;
+    const { show, handleClose, cartItems, totalAmount } = props;
 
     const navigate = useNavigate();
 
     /**
      * Toggle payment method
      */
-    const [paymentMethod,setPaymentMethod] = useState("COD");
+    const [paymentMethod, setPaymentMethod] = useState("COD");
     //----------------End Toggle payment method----------------//
 
 
     //Handle change value input
     const handleChange = (e) => {
-        const { name,value } = e.target;
+        const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value
@@ -106,9 +106,9 @@ const Checkout = (props) => {
      * Address 
      */
     //----------------Province----------------//
-    const [provinces,setProvinces] = useState([]);
-    const [selectProvince,setSelectProvince] = useState(null);
-    const [formDataProvince,setFormDataProvince] = useState(null);
+    const [provinces, setProvinces] = useState([]);
+    const [selectProvince, setSelectProvince] = useState(null);
+    const [formDataProvince, setFormDataProvince] = useState(null);
 
     useEffect(() => {
         addressVietNam.getProvinces()
@@ -118,7 +118,7 @@ const Checkout = (props) => {
             .catch((err) => {
                 console.log(err);
             })
-    },[])
+    }, [])
 
 
     const handleSelectProvince = (e) => {
@@ -143,9 +143,9 @@ const Checkout = (props) => {
 
 
     //----------------District----------------//
-    const [districts,setDistricts] = useState([]);
-    const [selectDistrict,setSelectDistrict] = useState(null);
-    const [formDataDistrict,setFormDataDistrict] = useState(null);
+    const [districts, setDistricts] = useState([]);
+    const [selectDistrict, setSelectDistrict] = useState(null);
+    const [formDataDistrict, setFormDataDistrict] = useState(null);
 
 
     useEffect(() => {
@@ -158,7 +158,7 @@ const Checkout = (props) => {
                     console.log(err);
                 })
         }
-    },[selectProvince])
+    }, [selectProvince])
 
     const handleSelectDistrict = (e) => {
         setSelectDistrict(e.target.value);
@@ -180,9 +180,9 @@ const Checkout = (props) => {
 
 
     //----------------Ward----------------//
-    const [wards,setWards] = useState([]);
-    const [selectWard,setSelectWard] = useState(null);
-    const [formDataWard,setFormDataWard] = useState(null);
+    const [wards, setWards] = useState([]);
+    const [selectWard, setSelectWard] = useState(null);
+    const [formDataWard, setFormDataWard] = useState(null);
 
     useEffect(() => {
         if (selectDistrict) {
@@ -195,7 +195,7 @@ const Checkout = (props) => {
                     console.log(err);
                 })
         }
-    },[selectDistrict])
+    }, [selectDistrict])
 
     const handleSelectWard = (e) => {
         setSelectWard(e.target.value);
@@ -218,8 +218,8 @@ const Checkout = (props) => {
     /**
     * Handle Form
     */
-    const [errors,setErrors] = useState({})
-    const [formData,setFormData] = useState({
+    const [errors, setErrors] = useState({})
+    const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
@@ -246,7 +246,7 @@ const Checkout = (props) => {
                     phone: formData.phone,
                     shippingAddress: shippingAddress,
                 } : null,
-                userId: isLoggedIn ? userId : null,
+                idUser: isLoggedIn ? userId : null,
                 name: formData.name,
                 email: formData.email,
                 phone: formData.phone,
@@ -289,9 +289,9 @@ const Checkout = (props) => {
     /**
       * Fetch user data from API and set it to state
       */
-    const [isLoggedIn,setIsLoggedIn] = useState(false);
-    const [user,setUser] = useState({});
-    const [userId,setUserId] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState({});
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem('USER_INFO');
@@ -314,10 +314,10 @@ const Checkout = (props) => {
                     });
                 })
                 .catch((err) => {
-                    console.log("Error fetching user",err);
+                    console.log("Error fetching user", err);
                 });
         }
-    },[]);
+    }, []);
 
     return (
         <>
