@@ -39,7 +39,10 @@ export const merci = {
 
     putStatusOrder: (data) => {
         return https.put('/Orders/updateStatus',data);
-    }
+    },
+    getYourHistoryOrder: (id) => {
+        return https.get(`/Orders/YourHistoryOrders/${id}`);
+    },
 }
 
 

@@ -34,7 +34,7 @@ const ListProduct = () => {
                     setProducts(res.data.data.products);
                     setFilteredProducts(res.data.data.products);
                 } else if (id == 2) {
-                    setProducts(res.data.data.combos);
+                    setProducts(res.data.data.products);
                     setFilteredProducts(res.data.data.products);
                 }
             })
