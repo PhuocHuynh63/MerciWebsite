@@ -270,10 +270,10 @@ const Checkout = (props) => {
                     handleClose();
                     localStorage.removeItem('cartItems');
                     toast.success("Đặt hàng thành công");
-                    if (res.data.status === 201) {
+                    if (res.data.status === 202) {
                         window.location.href = res.data.data;
                     } else {
-                        navigate('/')
+                        navigate('/thankyou')
                     }
                 })
                 .catch((err) => {

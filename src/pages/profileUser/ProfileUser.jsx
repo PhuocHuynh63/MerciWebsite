@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import './ProfileUser.scss';
-
+import { jwtDecode } from "jwt-decode";
+import { merci } from "../../service/merciSrc";
 const ProfileUser = () => {
 
     /**
      * Handle submit form
      */
+    
     const [errors, setErrors] = useState({})
     const [formData, setFormData] = useState({
         name: '',
@@ -25,6 +27,7 @@ const ProfileUser = () => {
      * Handle change input
      * @param {*} e 
      */
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -40,7 +43,35 @@ const ProfileUser = () => {
         }
     }
     //----------------End Handle change input----------------//
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState({});
+    const [userId, setUserId] = useState(null);
+    useEffect(() => {
+        const token = localStorage.getItem('USER_INFO');
+        if (token) {
+            setIsLoggedIn(true); // Set user as logged in
+            const decoded = jwtDecode(token);
+            console.log(decoded);
 
+            const id = decoded.id;
+            
+             merci.getUserById(id)
+                 .then((res) => {
+                   const userData = res.data;
+            //         setUser(userData);
+            //         setUserId(id);
+                    setFormData({
+                        name: userData.name,
+                        email: userData.email,
+                        phone: userData.phone,
+                        birthday: userData.birthday
+                    });
+                })
+                .catch((err) => {
+                    console.log("Error fetching user", err);
+                });
+        }
+    }, []);
 
     /**
      * Validate form
@@ -89,10 +120,7 @@ const ProfileUser = () => {
                         <input type="text" className={`name ${errors.name ? 'input-error' : ''}`} name='name' onChange={handleChange} value={formData.name} placeholder="Họ và tên" />
                         {errors.name && <p className="error">{errors.name}</p>}
                     </div>
-                    <div className="form-input birthday">
-                        <label htmlFor="birthday">Ngày sinh: <span> (*)</span></label>
-                        <input type="date" name='birthday' onChange={handleChange} value={formData.birthday} />
-                    </div>
+                   
                     <div className="form-input phone">
                         <label htmlFor="phone">Số điện thoại: <span> (*)</span></label>
                         <input type="tel" className={`phone ${errors.phone ? 'input-error' : ''}`} name='phone' onChange={handleChange} value={formData.phone} placeholder="Số điện thoại" />
@@ -114,3 +142,5 @@ const ProfileUser = () => {
 }
 
 export default ProfileUser;
+
+

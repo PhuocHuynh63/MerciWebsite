@@ -63,7 +63,7 @@ const SignInPage = () => {
                         description: response.description,
                     });
 
-                    if (response.role === "admin") {
+                    if (response.role === "1") {
                         navigate("/admin");
                     } else {
                         navigate("/");
